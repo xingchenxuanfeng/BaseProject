@@ -3,6 +3,7 @@ package com.xc.testapp
 import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.view.menu.MenuView
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -27,7 +28,8 @@ class MainActivity : BaseActivity() {
 
         rv.layoutManager = LinearLayoutManager(getContext())
 
-        rv_sticky_header_container.init(TYPE_HEADER, 20)
+        rv_sticky_header_container.init(TYPE_HEADER)
+        rv_sticky_header_container.noHeaderPosition = 45
 
         rv.addItemDecoration(DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL))
 
@@ -49,7 +51,13 @@ class MainActivity : BaseActivity() {
                 }
 
                 holder.itemView.item_btn.text = data[position].content
-                holder.itemView.setOnClickListener { Toast.makeText(getContext(), "第${position}项 type=${data[position].type} text=${data[position].content}", Toast.LENGTH_SHORT).show() }
+                holder.itemView.setOnClickListener {
+                    Toast.makeText(getContext(), "第${position}项 type=${data[position].type} text=${data[position].content}", Toast.LENGTH_SHORT).show()
+                    Handler().postDelayed({
+                        Data.data.clear()
+                        rv.adapter.notifyDataSetChanged()
+                    }, 1000)
+                }
             }
 
             override fun getItemCount(): Int {

@@ -1,36 +1,40 @@
 package com.xc.testapp
 
 import android.content.Context
+import android.os.Build
+import android.os.Handler
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
-import timber.log.Timber
-import java.text.FieldPosition
 
 /**
  * @author xc
  * @time 18-12-5.
  */
 class RvStickyHeaderContainer : FrameLayout {
+    private val debug = Log.isLoggable("RvStickyHeaderContainer", Log.DEBUG)
+    private val tag = "RvStickyHeaderContainer"
     private lateinit var headerContainer: FrameLayout
     private lateinit var recyclerView: RecyclerView
 
     private var headerType: Int = 0
-    private var noHeaderPosition: Int = -1
+    var noHeaderPosition: Int = Int.MAX_VALUE
 
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {}
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes) {}
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
 
-    fun init(headerType: Int, noHeaderPosition: Int = -1) {
+    fun init(headerType: Int) {
         this.headerType = headerType
-        this.noHeaderPosition = noHeaderPosition
         recyclerView = getChildAt(0) as? RecyclerView
                 ?: throw RuntimeException("RecyclerView should be the first child view.")
 
@@ -53,37 +57,55 @@ class RvStickyHeaderContainer : FrameLayout {
                     ?: throw RuntimeException("Only support LinearLayoutManager")
 
             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
-            if (firstVisibleItemPosition == -1) return
             val relativeStickyHeaderPosition = findRelativeStickyHeaderPosition(firstVisibleItemPosition, adapter)
-            if (relativeStickyHeaderPosition == -1) return
+
+            //初始化header的viewHolder
+            if (currentStickyHeaderPosition != relativeStickyHeaderPosition) {
+                currentStickyHeaderPosition = relativeStickyHeaderPosition
+                if (relativeStickyHeaderPosition == -1) {
+                    stickyHeaderViewHolder.itemView.visibility = View.GONE
+                    if (debug) Log.d(tag, "relativeStickyHeader removed")
+                } else {
+                    stickyHeaderViewHolder.itemView.visibility = View.VISIBLE
+                    adapter.bindViewHolder(stickyHeaderViewHolder, relativeStickyHeaderPosition)
+                }
+            }
+
+            if (relativeStickyHeaderPosition == -1) {
+                if (debug) Log.d(tag, "not found relativeStickyHeader")
+                return
+            }
+
             val nextStickyHeaderPosition = findNextStickyHeaderPosition(firstVisibleItemPosition, adapter)
 
-            if (currentStickyHeaderPosition != relativeStickyHeaderPosition) {
-                adapter.bindViewHolder(stickyHeaderViewHolder, relativeStickyHeaderPosition)
-                currentStickyHeaderPosition = relativeStickyHeaderPosition
-            }
-            if (relativeStickyHeaderPosition == nextStickyHeaderPosition) return
+            //设置了不显示header的position的情况
+            val lastShowHeaderPosition = Math.max(0, noHeaderPosition - 1)
 
-            val nextStickyHeaderView: View? = layoutManager.findViewByPosition(nextStickyHeaderPosition)
+            val nextStickyHeaderOrLastHeaderPosition = Math.min(nextStickyHeaderPosition, lastShowHeaderPosition)
+            val nextStickyHeaderOrLastHeaderView: View? = layoutManager.findViewByPosition(nextStickyHeaderOrLastHeaderPosition)
+
+            val nextStickyHeaderOrLastHeaderViewTop = (nextStickyHeaderOrLastHeaderView?.top
+                    ?: if (nextStickyHeaderOrLastHeaderPosition < firstVisibleItemPosition) 0 else recyclerView.height)
 
             val realStickHeaderView = stickyHeaderViewHolder.itemView
+            val translationY = nextStickyHeaderOrLastHeaderViewTop - realStickHeaderView.height
 
-            val translationY = (nextStickyHeaderView?.top
-                    ?: recyclerView.height) - realStickHeaderView.height
             if (translationY > 0) {
                 //保持顶部
-
+                realStickHeaderView.translationY = 0.toFloat()
             } else {
+                //随着下个header偏移
                 realStickHeaderView.translationY = translationY.toFloat()
-                Timber.e("${realStickHeaderView.top} ${realStickHeaderView.height} ${realStickHeaderView.translationY}")
             }
+
+            if (debug) Log.d(tag, "firstVisibleItemPosition=$firstVisibleItemPosition relativeStickyHeaderPosition=$relativeStickyHeaderPosition nextStickyHeaderPosition=$nextStickyHeaderPosition lastShowHeaderPosition=$lastShowHeaderPosition realStickHeaderView.height=${realStickHeaderView.height} realStickHeaderView.translationY=${realStickHeaderView.translationY}")
 
         }
     }
 
     private val stickyHeaderViewHolder: RecyclerView.ViewHolder by lazy {
         val viewHolder = recyclerView.adapter.createViewHolder(headerContainer, headerType)
-        post {
+        Handler().postAtFrontOfQueue {
             headerContainer.addView(viewHolder.itemView)
         }
         viewHolder
@@ -106,7 +128,7 @@ class RvStickyHeaderContainer : FrameLayout {
                 return index
             }
         }
-        return -1
+        return adapter.itemCount - 1
     }
 }
 
