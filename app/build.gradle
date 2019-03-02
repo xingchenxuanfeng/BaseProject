@@ -7,6 +7,14 @@ crashlytics {
     enableNdk true
 }
 
+apply plugin: 'add-trycatch'
+
+addTryCatch {
+    hookPoint = ["com.addtrycatchplugin.TestCrash" : ["crashMethod1", "crashMethod2"],
+                 "com.addtrycatchplugin.TestCrash1": ["crashMethod1", "crashMethod2"]]
+    exceptionHandler = ["com.addtrycatchplugin.ExceptionUtils": "uploadCatchedException"]
+}
+
 apply from: rootProject.file('commen.gradle')
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion as int
