@@ -46,6 +46,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     api 'com.google.firebase:firebase-core:16.0.7'
+    api 'com.google.firebase:firebase-database:16.1.0'
     api 'com.crashlytics.sdk.android:crashlytics:2.9.9'
     api 'com.crashlytics.sdk.android:crashlytics-ndk:2.0.5'
 

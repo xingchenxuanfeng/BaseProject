@@ -24,4 +24,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     compileOnly 'com.android.support:recyclerview-v7:rootProject.ext.supportLibVersion'
+    compileOnly 'com.android.support:appcompat-v7:rootProject.ext.supportLibVersion'
 }
