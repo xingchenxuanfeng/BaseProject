@@ -13,7 +13,7 @@ rxjava |√
 okhttp |√
 retrofit |√
 timber |√
-BRVAH |50% |已引入，未使用
+multitype |50% |已引入，未使用
 eventbus |50% |已引入，未使用
 glide |50% |已引入，未使用
 InstantApp |0% |
