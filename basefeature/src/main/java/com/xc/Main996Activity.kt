@@ -8,6 +8,8 @@ import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.basefeature.R
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
 import com.xc.baseproject.multiTypeAdapter.MultiCommonViewHolder
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.item_996.view.*
 import kotlinx.android.synthetic.main.main_996_activity.*
 import me.drakeet.multitype.MultiTypeAdapter
@@ -62,6 +64,10 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
                 ToastUtils.showShort("顶")
                 item.voteAction = if (item.voteAction != true) true else null
                 adapter.notifyItemChanged(getPosition(holder))
+                Repository.githubApi.getTestData().subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread()).subscribe {
+                            ToastUtils.showShort(it.data)
+                        }
             }
             down_ll.setOnClickListener {
                 ToastUtils.showShort("踩")

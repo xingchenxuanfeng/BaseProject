@@ -14,11 +14,13 @@ object NetService {
     private val baseOkHttpClient: OkHttpClient
     private val baseRetrofit: Retrofit
     val wayJdRetrofit: Retrofit
+    var githubRetrofit: Retrofit
 
     const val wayJdApiAppKey = "e4388cc76bf9529e6e29a938cbdf839d"
-
     private const val baseUrl = "https://localhost/"
+
     private const val baseWayJdApiUrl = "https://way.jd.com/"
+    private const val baseGithubApiUrl = "https://raw.githubusercontent.com/xingchenxuanfeng/staticData/"
 
     init {
         val okHttpBuilder = OkHttpClient.Builder()
@@ -34,6 +36,9 @@ object NetService {
 
         wayJdRetrofit = baseRetrofit.newBuilder()
                 .baseUrl(baseWayJdApiUrl)
+                .build()
+        githubRetrofit = baseRetrofit.newBuilder()
+                .baseUrl(baseGithubApiUrl)
                 .build()
     }
 
