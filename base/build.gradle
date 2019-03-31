@@ -46,10 +46,15 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     api 'com.google.firebase:firebase-core:16.0.7'
-    api 'com.google.firebase:firebase-database:16.1.0'
     api 'com.crashlytics.sdk.android:crashlytics:2.9.9'
     api 'com.crashlytics.sdk.android:crashlytics-ndk:2.0.5'
 
     api 'com.blankj:utilcode:1.23.7'
     api 'me.drakeet.multitype:multitype-kotlin:3.4.4'//update to multitype:4.0.0 when use AndroidX
+
+    api 'cn.leancloud.android:avoscloud-sdk:4.7.9'    // LeanCloud 基础包
+    api 'cn.leancloud.android:avoscloud-push:4.7.9@aar'    // 推送与即时通讯需要的包
+    api 'cn.leancloud.android:avoscloud-mixpush:4.7.9@aar'    // Android 混合推送需要的包
+    api 'cn.leancloud.android:avoscloud-feedback:4.7.9@aar'    // LeanCloud 用户反馈包
+    api 'cn.leancloud.android:avoscloud-search:4.7.9@aar'    // LeanCloud 应用内搜索包
 }

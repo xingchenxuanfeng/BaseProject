@@ -1,11 +1,8 @@
 package com.xc
 
 import android.annotation.SuppressLint
+import com.avos.avoscloud.*
 import com.blankj.utilcode.util.ToastUtils
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.xc.baseproject.net.NetService
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -13,6 +10,10 @@ import timber.log.Timber
 import java.io.Serializable
 
 object Repository {
+    init {
+        AVObject.registerSubclass(VoteModel::class.java)
+    }
+
     interface GithubApi {
         @GET("master/testStaticData")
         fun getTestData(): Observable<TestData>
@@ -22,47 +23,50 @@ object Repository {
         NetService.githubRetrofit.create(GithubApi::class.java)
     }
 
-    @SuppressLint("CheckResult")
-    fun addNewCompany(name: String) {//todo 优化或校验
+    fun addNewCompany(name: String?) {
         if (name.isNullOrEmpty()) {
             ToastUtils.showShort("公司名称不能为空")
             return
         }
-        val newVoteModel = VoteModel(0, name, 1, true)
-        val database = FirebaseDatabase.getInstance()
-        val reference = database.getReference("MainData")
-        getMainData().subscribe {
-            it.companyList.add(newVoteModel)
-            reference.setValue(it)
-        }
+        val voteModel = VoteModel()
+        voteModel.name = name
+        voteModel.voteCount = 1
+
+        voteModel.saveInBackground(
+                object : SaveCallback() {
+                    override fun done(e: AVException?) {
+                        ToastUtils.showShort(e?.message ?: "保存成功")
+                    }
+                }
+        )
     }
 
-    fun getMainData(): Observable<MainData> {
+    fun getMainData(): Observable<List<VoteModel>> {
         return Observable.create {
-            val database = FirebaseDatabase.getInstance()
-            val reference = database.getReference("MainData")
-            reference.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    Timber.e(error.toException())
-                    it.onError(error.toException())
-                }
+            val query = AVObject.getQuery(VoteModel::class.java) //AVQuery<VoteModel>("VoteModel")
+            query.findInBackground(
+                    object : FindCallback<VoteModel>() {
+                        override fun done(avObjects: MutableList<VoteModel>?, avException: AVException?) {
+                            if (avException != null) {
+                                ToastUtils.showShort(avException.message)
+                                return
+                            }
+                            it.onNext(avObjects ?: mutableListOf())
+                            it.onComplete()
+                        }
+                    }
+            )
 
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val mainData = dataSnapshot.getValue(MainData::class.java)
-                    it.onNext(mainData ?: MainData())
-                    it.onComplete()
-                }
-            })
         }
     }
-
 }
 
 data class TestData(val data: String) : Serializable
-data class MainData(var companyList: MutableList<VoteModel> = mutableListOf()) : Serializable
-data class VoteModel(
-        var rank: Int = 0,
-        var name: String = "***",
-        var voteCount: Int = 0,
-        var voteAction: Boolean? = null//true :顶 false :踩 null :无
-) : Serializable
+@AVClassName("VoteModel")
+class VoteModel : Serializable, AVObject() {
+    var name: String? = ""
+    var rank: Int? = 0
+    var voteCount: Int? = 1
+    var upAction: Boolean = false
+    var downAction: Boolean = false
+}

@@ -1,5 +1,6 @@
 package com.xc
 
+import com.avos.avoscloud.AVUser
 import com.blankj.utilcode.util.ToastUtils
 import com.xc.baseproject.basefeature.R
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
@@ -16,16 +17,21 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
             rank_tv.text = item.rank.toString()
             name_tv.text = item.name
             vote_count_tv.text = item.voteCount.toString()
-            up_ll.isSelected = (item.voteAction == true)
-            down_ll.isSelected = (item.voteAction == false)
+            up_ll.isSelected = item.upAction
+            down_ll.isSelected = item.downAction
             up_ll.setOnClickListener {
-                ToastUtils.showShort("顶")
-                item.voteAction = if (item.voteAction != true) true else null
+                if (AVUser.getCurrentUser() == null) {
+
+                    return@setOnClickListener
+                }
+                item.upAction = !item.upAction
+                item.downAction = false
                 adapter.notifyItemChanged(getPosition(holder))
             }
             down_ll.setOnClickListener {
                 ToastUtils.showShort("踩")
-                item.voteAction = if (item.voteAction != false) false else null
+                item.downAction = !item.downAction
+                item.upAction = false
                 adapter.notifyItemChanged(getPosition(holder))
             }
         }

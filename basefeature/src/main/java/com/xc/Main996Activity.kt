@@ -19,33 +19,35 @@ import me.drakeet.multitype.register
  */
 class Main996Activity : BaseActivity() {
 
-    private lateinit var adapter: MultiTypeAdapter
-
-    private lateinit var data: MutableList<VoteModel>
+    private var data: MutableList<VoteModel> = mutableListOf()
+    private var adapter: MultiTypeAdapter = MultiTypeAdapter(data)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_996_activity)
         initView()
-        initData()
         initListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initData()
     }
 
     private fun initView() {
         initToolBar()
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
         rv_main.layoutManager = LinearLayoutManager(getContext())
-        data = mutableListOf()
-        adapter = MultiTypeAdapter(data)
         adapter.register(VoteModel::class, MainViewHolder())
         rv_main.adapter = adapter
     }
 
     @SuppressLint("CheckResult")
     private fun initData() {
+        sp_layout.isRefreshing = true
         Repository.getMainData().subscribe {
             data.clear()
-            data.addAll(it.companyList)
+            data.addAll(it)
             adapter.notifyDataSetChanged()
             sp_layout.isRefreshing = false
         }

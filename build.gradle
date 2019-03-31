@@ -24,7 +24,10 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'https://maven.google.com/'
+            url 'http://developer.huawei.com/repo/'
+        }
+        maven {
+            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
     }
 }
