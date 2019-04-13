@@ -35,7 +35,6 @@ class Main996Activity : BaseActivity() {
     }
 
     private fun initView() {
-        initToolBar()
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
         rv_main.layoutManager = LinearLayoutManager(getContext())
         adapter.register(VoteModel::class, MainViewHolder())
@@ -59,12 +58,8 @@ class Main996Activity : BaseActivity() {
         }
     }
 
-    private fun initToolBar() {
-        setActionBar(toolbar)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
             R.id.add -> {
                 startActivity(Intent(getContext(), AddNewItemActivity::class.java))
             }

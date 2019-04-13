@@ -3,7 +3,8 @@
     package="com.xc.baseproject.app">
 
     <application
+        android:label="@string/app_name"
         android:icon="@drawable/ic_android_24dp"
-        tools:replace="android:icon"></application>
+        tools:replace="android:icon,android:label"></application>
 
 </manifest>

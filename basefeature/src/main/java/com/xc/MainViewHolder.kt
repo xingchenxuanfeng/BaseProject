@@ -1,6 +1,8 @@
 package com.xc
 
+import android.content.Intent
 import com.avos.avoscloud.AVUser
+import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.xc.baseproject.basefeature.R
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
@@ -21,7 +23,7 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
             down_ll.isSelected = item.downAction
             up_ll.setOnClickListener {
                 if (AVUser.getCurrentUser() == null) {
-
+                    context.startActivity(Intent(context, LoginActivity::class.java))
                     return@setOnClickListener
                 }
                 item.upAction = !item.upAction
@@ -29,7 +31,10 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
                 adapter.notifyItemChanged(getPosition(holder))
             }
             down_ll.setOnClickListener {
-                ToastUtils.showShort("踩")
+                if (AVUser.getCurrentUser() == null) {
+                    context.startActivity(Intent(context, LoginActivity::class.java))
+                    return@setOnClickListener
+                }
                 item.downAction = !item.downAction
                 item.upAction = false
                 adapter.notifyItemChanged(getPosition(holder))
