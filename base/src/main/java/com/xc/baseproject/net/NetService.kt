@@ -20,7 +20,7 @@ object NetService {
     private const val baseUrl = "https://localhost/"
 
     private const val baseWayJdApiUrl = "https://way.jd.com/"
-    private const val baseGithubApiUrl = "https://raw.githubusercontent.com/xingchenxuanfeng/staticData/"
+    private const val baseGithubApiUrl = "https://api.github.com/"
 
     init {
         val okHttpBuilder = OkHttpClient.Builder()

@@ -43,6 +43,12 @@
         <!-- 反馈组件（需要加入以下声明）START -->
         <activity android:name="com.avos.avoscloud.feedback.ThreadActivity"></activity>
         <!-- 反馈组件 END -->
+
+        <activity
+            android:name=".account.LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".account.github.GithubOauthActivity"
+            android:label="@string/oauth_github"/>
     </application>
 
 </manifest>

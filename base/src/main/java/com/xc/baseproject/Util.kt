@@ -1,9 +1,18 @@
 package com.xc.baseproject
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
+import android.content.Context
 import com.xc.baseproject.misc.LiveDataToObservableException
 import io.reactivex.Observable
+
+@SuppressLint("StaticFieldLeak")
+object Util {
+    lateinit var appContext: Context
+        internal set
+
+}
 
 fun <T> LiveData<T>.toObservable(lifecycleOwner: LifecycleOwner, valueIfNull: T? = null): Observable<T>? {
     return Observable.create { observer ->

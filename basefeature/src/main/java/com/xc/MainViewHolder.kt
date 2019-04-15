@@ -4,6 +4,7 @@ import android.content.Intent
 import com.avos.avoscloud.AVUser
 import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.xc.baseproject.account.LoginActivity
 import com.xc.baseproject.basefeature.R
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
 import com.xc.baseproject.multiTypeAdapter.MultiCommonViewHolder

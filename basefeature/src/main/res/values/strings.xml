@@ -10,5 +10,4 @@
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
     <string name="main_label">996公司列表</string>
-    <string name="title_activity_login">登录</string>
 </resources>

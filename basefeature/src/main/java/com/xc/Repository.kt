@@ -14,13 +14,13 @@ object Repository {
         AVObject.registerSubclass(VoteModel::class.java)
     }
 
-    interface GithubApi {
+    interface GithubStaticDataApi {
         @GET("master/testStaticData")
         fun getTestData(): Observable<TestData>
     }
 
-    val githubApi: GithubApi by lazy {
-        NetService.githubRetrofit.create(GithubApi::class.java)
+    val githubApi: GithubStaticDataApi by lazy {
+        NetService.githubRetrofit.newBuilder().baseUrl("https://raw.githubusercontent.com/xingchenxuanfeng/staticData/").build().create(GithubStaticDataApi::class.java)
     }
 
     fun addNewCompany(name: String?) {

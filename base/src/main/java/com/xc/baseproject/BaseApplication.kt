@@ -15,6 +15,7 @@ open class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        Util.appContext = applicationContext
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {
