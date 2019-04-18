@@ -17,7 +17,6 @@ fun <T> Observable<T>.netCompose(): Observable<T> {
             .observeOn(AndroidSchedulers.mainThread())
             .onErrorReturn {
                 Timber.e(it)
-                Crashlytics.logException(it)
                 return@onErrorReturn null
             }
 }

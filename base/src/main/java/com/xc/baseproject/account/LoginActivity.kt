@@ -35,10 +35,11 @@ class LoginActivity : BaseActivity() {
                         override fun done(user: AVUser?, e: AVException?) {
                             progress_circular.setVisible(false)
                             login_github.isEnabled = true
-                            if (user != null) ToastUtils.showShort("登录成功")
-                            else {
+                            if (user != null) {
+                                ToastUtils.showShort("登录成功")
+                                finish()
+                            } else {
                                 Timber.e(e)
-                                Crashlytics.logException(e)
                                 ToastUtils.showShort("登录失败")
                             }
                         }

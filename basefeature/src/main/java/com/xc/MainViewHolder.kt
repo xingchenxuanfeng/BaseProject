@@ -29,6 +29,7 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
                 }
                 item.upAction = !item.upAction
                 item.downAction = false
+                Repository.modifyMyVote(item)
                 adapter.notifyItemChanged(getPosition(holder))
             }
             down_ll.setOnClickListener {
@@ -38,6 +39,7 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
                 }
                 item.downAction = !item.downAction
                 item.upAction = false
+                Repository.modifyMyVote(item)
                 adapter.notifyItemChanged(getPosition(holder))
             }
         }
