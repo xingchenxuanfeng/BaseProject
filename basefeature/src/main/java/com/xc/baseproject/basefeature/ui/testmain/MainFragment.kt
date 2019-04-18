@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.xc.baseproject.basefeature.R
-import com.xc.baseproject.basefeature.testtuling.TulingActivity
+import com.xc.baseproject.chat.ChatActivity
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -32,7 +32,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        message.setOnClickListener { startActivity(Intent(context, TulingActivity::class.java)) }
+        message.setOnClickListener { startActivity(Intent(context, ChatActivity::class.java)) }
         button.setOnClickListener { startActivity(Intent(context, MainActivity::class.java)) }
     }
 

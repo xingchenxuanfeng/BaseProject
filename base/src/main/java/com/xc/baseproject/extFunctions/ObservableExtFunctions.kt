@@ -4,7 +4,9 @@ import android.util.Log
 import com.crashlytics.android.Crashlytics
 import com.google.android.gms.common.internal.ApiExceptionUtil
 import io.reactivex.Observable
+import io.reactivex.ObservableSource
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
@@ -15,8 +17,8 @@ import timber.log.Timber
 fun <T> Observable<T>.netCompose(): Observable<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .onErrorReturn {
+            .onErrorResumeNext(Function<Throwable, ObservableSource<T>> { it: Throwable ->
                 Timber.e(it)
-                return@onErrorReturn null
-            }
+                return@Function Observable.empty<T>()
+            })
 }

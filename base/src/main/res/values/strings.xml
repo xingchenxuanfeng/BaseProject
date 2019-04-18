@@ -3,4 +3,9 @@
     <string name="title_activity_login">登录</string>
     <string name="login_with_github">使用Github账号登录</string>
     <string name="oauth_github">Github登录</string>
+    <string name="send">发送</string>
+    <string name="chat">聊天</string>
+    <string name="avatars">头像</string>
+    <string name="full_text">全文</string>
+    <string name="collapse">折叠</string>
 </resources>

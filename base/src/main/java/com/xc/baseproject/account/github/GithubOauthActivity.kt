@@ -31,7 +31,7 @@ class GithubOauthActivity : BaseActivity() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        webView = WebView(getContext())
+        webView = WebView(this)
         setContentView(webView)
 
         var scopeAppendToUrl = ""

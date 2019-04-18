@@ -32,7 +32,7 @@ class Main996Activity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        initData()
+        refreshData()
     }
 
     private fun initView() {
@@ -44,7 +44,7 @@ class Main996Activity : BaseActivity() {
     }
 
     @SuppressLint("CheckResult")
-    private fun initData() {
+    private fun refreshData() {
         sp_layout.isRefreshing = true
         Repository.getMainData().subscribe {
             data.clear()
@@ -56,7 +56,7 @@ class Main996Activity : BaseActivity() {
 
     private fun initListener() {
         sp_layout.setOnRefreshListener {
-            initData()
+            refreshData()
         }
     }
 

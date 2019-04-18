@@ -60,9 +60,9 @@ object Repository {
                             }
                             val currentVoteModel: VoteModel? = AVUser.getCurrentUser()
                                     ?.getAVObject(CURRENT_VOTE, VoteModel::class.java)
-                            val currentVoteState = AVUser.getCurrentUser().getInt(CURRENT_VOTE_STATE)
                             avObjects?.forEach { item: VoteModel ->
                                 if (item == currentVoteModel) {
+                                    val currentVoteState = AVUser.getCurrentUser().getInt(CURRENT_VOTE_STATE)
                                     item.voteState = currentVoteState
                                 }
                             }
@@ -115,8 +115,8 @@ object Repository {
         })
     }
 
-    fun getCurrentVote(): VoteModel {
-        val currentUser = AVUser.getCurrentUser()
+    fun getCurrentVote(): VoteModel? {
+        val currentUser: AVUser = AVUser.getCurrentUser() ?: return null
         val voteModel = currentUser.getAVObject(CURRENT_VOTE, VoteModel::class.java)
         voteModel.voteState = currentUser.getInt(CURRENT_VOTE_STATE)
         return voteModel

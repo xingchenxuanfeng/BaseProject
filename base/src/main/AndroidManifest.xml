@@ -19,27 +19,24 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
+        <activity android:name=".chat.ChatActivity" />
+
         <meta-data
             android:name="aia-compat-api-min-version"
-            android:value="1" />
-
-        <!--手动初始化firebase Crashlytics sdk-->
+            android:value="1" /> <!-- 手动初始化firebase Crashlytics sdk -->
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
-            android:value="false" />
-
-        <!-- 即时通讯模块、推送（均需要加入以下声明） START -->
+            android:value="false" /> <!-- 即时通讯模块、推送（均需要加入以下声明） START -->
         <!-- 即时通讯模块、推送都要使用 PushService -->
         <service android:name="com.avos.avoscloud.PushService" />
+
         <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver>
-        <!-- 即时通讯模块、推送 END -->
-
+        </receiver> <!-- 即时通讯模块、推送 END -->
         <!-- 反馈组件（需要加入以下声明）START -->
         <activity android:name="com.avos.avoscloud.feedback.ThreadActivity"></activity>
         <!-- 反馈组件 END -->
@@ -47,8 +44,9 @@
         <activity
             android:name=".account.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".account.github.GithubOauthActivity"
-            android:label="@string/oauth_github"/>
+        <activity
+            android:name=".account.github.GithubOauthActivity"
+            android:label="@string/oauth_github" />
     </application>
 
 </manifest>
