@@ -41,9 +41,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name="com.xc.Main996Activity"
-            android:label="@string/main_label">
+        <activity android:name="com.xc.Main996Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -52,9 +50,6 @@
             </intent-filter>
         </activity>
         <activity android:name="com.xc.AddNewItemActivity" />
-        <activity
-            android:name="com.xc.LoginActivity"
-            android:label="@string/title_activity_login" />
     </application>
 
 </manifest>

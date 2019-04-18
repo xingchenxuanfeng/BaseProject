@@ -38,7 +38,7 @@ class GithubOauth(
 
     @SuppressLint("CheckResult")
     @Subscribe
-    fun onMessageEvent(event: GitHubAuthEvent) {
+    fun onGitHubOAuthEvent(event: GitHubAuthEvent) {
         EventBus.getDefault().unregister(this)
         val authToken = event.authToken ?: return listener.callback(null)
         GithubRepository.githubApi.getUser("token $authToken")

@@ -1,18 +1,35 @@
 package com.xc.baseproject
 
 import android.annotation.SuppressLint
+import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.base_activity_layout.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import timber.log.Timber
 
 @SuppressLint("Registered")
 open class BaseActivity : FragmentActivity() {
 
     fun getContext(): FragmentActivity = this
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe
+    fun onEventBaseMessage(baseMessage: BaseMessage) {
+    }
 
     override fun setContentView(layoutResID: Int) {
         super.setContentView(R.layout.base_activity_layout)
@@ -49,5 +66,6 @@ open class BaseActivity : FragmentActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
 }
+
+class BaseMessage(val message: Any)

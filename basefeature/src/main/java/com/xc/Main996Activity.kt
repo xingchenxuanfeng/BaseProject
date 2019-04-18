@@ -12,6 +12,7 @@ import com.xc.baseproject.basefeature.R
 import kotlinx.android.synthetic.main.main_996_activity.*
 import me.drakeet.multitype.MultiTypeAdapter
 import me.drakeet.multitype.register
+import org.greenrobot.eventbus.Subscribe
 
 /**
  * @author xc
@@ -35,6 +36,7 @@ class Main996Activity : BaseActivity() {
     }
 
     private fun initView() {
+        setTitle(R.string.main_label)
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
         rv_main.layoutManager = LinearLayoutManager(getContext())
         adapter.register(VoteModel::class, MainViewHolder())
@@ -70,5 +72,16 @@ class Main996Activity : BaseActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main996menu, menu)
         return true
+    }
+
+    @Subscribe
+    fun onEventModifyVote(event: ModifyVoteEvent) {
+        for ((index, it) in data.withIndex()) {
+            if (it == event.voteModelRef) {
+                it.voteCount += event.newVoteState - it.voteState
+                it.voteState = event.newVoteState
+                adapter.notifyItemChanged(index)
+            }
+        }
     }
 }
