@@ -5,12 +5,14 @@ import com.avos.avoscloud.AVUser
 import com.xc.VoteModel.Companion.VOTE_STATE_DOWN
 import com.xc.VoteModel.Companion.VOTE_STATE_NONE
 import com.xc.VoteModel.Companion.VOTE_STATE_UP
+import com.xc.baseproject.AppUtil
 import com.xc.baseproject.account.LoginActivity
 import com.xc.baseproject.basefeature.R
 import com.xc.baseproject.chat.ChatActivity
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
 import com.xc.baseproject.multiTypeAdapter.MultiCommonViewHolder
 import kotlinx.android.synthetic.main.item_996.view.*
+import timber.log.Timber
 
 class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
     override fun getLayoutResource(): Int {
@@ -34,21 +36,14 @@ class MainViewHolder : MultiBaseViewHolder<VoteModel>() {
             up_ll.isSelected = (item == userCurrentVote && userCurrentVote.voteState == VOTE_STATE_UP)
             down_ll.isSelected = (item == userCurrentVote && userCurrentVote.voteState == VOTE_STATE_DOWN)
             up_ll.setOnClickListener {
-                if (AVUser.getCurrentUser() == null) {
-                    context.startActivity(Intent(context, LoginActivity::class.java))
-                    return@setOnClickListener
-                }
+                AppUtil.tryGetCurrentUser() ?: return@setOnClickListener
                 val newVoteState = if (item.voteState == VOTE_STATE_UP) VOTE_STATE_NONE else VOTE_STATE_UP
 
                 Repository.modifyMyVote(item, newVoteState)
                 adapter.notifyItemChanged(getPosition(holder))
             }
             down_ll.setOnClickListener {
-                if (AVUser.getCurrentUser() == null) {
-                    context.startActivity(Intent(context, LoginActivity::class.java))
-                    return@setOnClickListener
-                }
-
+                AppUtil.tryGetCurrentUser() ?: return@setOnClickListener
                 val newVoteState = if (item.voteState == VOTE_STATE_DOWN) VOTE_STATE_NONE else VOTE_STATE_DOWN
 
                 Repository.modifyMyVote(item, newVoteState)

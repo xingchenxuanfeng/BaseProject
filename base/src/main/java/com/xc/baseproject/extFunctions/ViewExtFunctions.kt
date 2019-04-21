@@ -17,7 +17,7 @@ fun View?.setVisible(visible: Boolean) {
     this.visibility = if (visible) View.VISIBLE else View.GONE
 }
 
-fun ImageView?.loadUrl(imageUrl: String) {
+fun ImageView?.loadUrl(imageUrl: String?) {
     if (this == null) return Timber.e(imageUrl)
     Glide.with(this).load(imageUrl).into(this)
 }

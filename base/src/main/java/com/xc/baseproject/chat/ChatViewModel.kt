@@ -1,7 +1,10 @@
 package com.xc.baseproject.chat
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import com.avos.avoscloud.AVUser
+import com.xc.baseproject.AppUtil
 import com.xc.baseproject.extFunctions.netCompose
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -20,19 +23,36 @@ class ChatViewModel : ViewModel() {
         mChatData.value = mutableListOf()
     }
 
+    @SuppressLint("CheckResult")
     fun sendMessage(message: String) {
         val chatData = mChatData.value
-        val disposable = ChatRepository.getChatResponse(message).netCompose()
-                .doOnSubscribe {
-                    chatData?.add(ChatMessage(message, "user" + (1..100).random().toString(), "https://avatars2.githubusercontent.com/u/7694736?v=4"))
-                    mChatData.value = chatData
-                }
-                .subscribe { result ->
-                    if (result == null) return@subscribe
-                    chatData?.add(ChatMessage(result.result.text, "user" + (1..100).random().toString(), "https://avatars2.githubusercontent.com/u/7694736?v=4"))
-                    mChatData.value = chatData
-                }
-        mDisposable.add(disposable)
+        ChatRepository.postMessage(message).subscribe {
+            chatData?.add(it)
+            mChatData.value = chatData
+        }
+//        val currentUser = AppUtil.tryGetCurrentUser() ?: return
+//
+//        val chatData = mChatData.value
+//        val disposable = ChatRepository.getChatResponse(message).netCompose()
+//                .doOnSubscribe {
+//
+//                    val chatMessage = ChatMessage()
+//                    chatMessage.message = message
+//                    chatMessage.user = currentUser
+//                    chatData?.add(chatMessage)
+//                    mChatData.value = chatData
+//                }
+//                .subscribe { result ->
+//                    if (result == null) return@subscribe
+//
+//                    val chatMessage = ChatMessage()
+//                    chatMessage.message = result.result.text
+//                    chatMessage.user = currentUser
+//                    chatData?.add(chatMessage)
+//
+//                    mChatData.value = chatData
+//                }
+//        mDisposable.add(disposable)
     }
 
     fun fetch() {

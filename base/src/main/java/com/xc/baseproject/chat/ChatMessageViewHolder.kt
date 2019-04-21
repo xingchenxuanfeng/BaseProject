@@ -16,8 +16,8 @@ class ChatMessageViewHolder : MultiBaseViewHolder<ChatMessage>() {
 
     override fun onBindViewHolder(holder: MultiCommonViewHolder, item: ChatMessage) {
         holder.itemView.run {
-            avatars.loadUrl(item.userAvatar)
-            user_name.text = item.userName
+            avatars.loadUrl(item.user.getString("userAvatar"))
+            user_name.text = item.user.getString("userName")
             chat_message.setFullString(item.message)
 
         }
