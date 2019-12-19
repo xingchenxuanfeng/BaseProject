@@ -45,6 +45,7 @@ captures/
 /out/
 
 # User-specific configurations
+.idea/
 .idea/caches/
 .idea/libraries/
 .idea/shelf/
@@ -79,7 +80,7 @@ obj/
 #*.jks
 
 # Google Services (e.g. APIs or Firebase)
-google-services.json
+#google-services.json
 
 # Freeline
 freeline.py

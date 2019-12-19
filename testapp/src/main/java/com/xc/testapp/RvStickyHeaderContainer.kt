@@ -3,9 +3,9 @@ package com.xc.testapp
 import android.content.Context
 import android.os.Build
 import android.os.Handler
-import android.support.annotation.RequiresApi
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -19,7 +19,7 @@ class RvStickyHeaderContainer : FrameLayout {
     private val debug = Log.isLoggable("RvStickyHeaderContainer", Log.DEBUG)
     private val tag = "RvStickyHeaderContainer"
     private lateinit var headerContainer: FrameLayout
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView: androidx.recyclerview.widget.RecyclerView
 
     private var headerType: Int = 0
     var noHeaderPosition: Int = Int.MAX_VALUE
@@ -35,7 +35,7 @@ class RvStickyHeaderContainer : FrameLayout {
 
     fun init(headerType: Int) {
         this.headerType = headerType
-        recyclerView = getChildAt(0) as? RecyclerView
+        recyclerView = getChildAt(0) as? androidx.recyclerview.widget.RecyclerView
                 ?: throw RuntimeException("RecyclerView should be the first child view.")
 
         headerContainer = FrameLayout(context)
@@ -45,15 +45,15 @@ class RvStickyHeaderContainer : FrameLayout {
         recyclerView.addOnScrollListener(RvOnScrollListener())
     }
 
-    private inner class RvOnScrollListener : RecyclerView.OnScrollListener() {
+    private inner class RvOnScrollListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
         var currentStickyHeaderPosition = -1
 
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
 
             super.onScrolled(recyclerView, dx, dy)
             val adapter = recyclerView?.adapter
                     ?: throw RuntimeException("Please set adapter")
-            val layoutManager = recyclerView.layoutManager as? LinearLayoutManager
+            val layoutManager = recyclerView.layoutManager as? androidx.recyclerview.widget.LinearLayoutManager
                     ?: throw RuntimeException("Only support LinearLayoutManager")
 
             val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
@@ -103,15 +103,16 @@ class RvStickyHeaderContainer : FrameLayout {
         }
     }
 
-    private val stickyHeaderViewHolder: RecyclerView.ViewHolder by lazy {
-        val viewHolder = recyclerView.adapter.createViewHolder(headerContainer, headerType)
+    private val stickyHeaderViewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder by lazy {
+        val viewHolder = recyclerView.adapter?.createViewHolder(headerContainer, headerType)
+                ?: throw RuntimeException("Please set adapter")
         Handler().postAtFrontOfQueue {
             headerContainer.addView(viewHolder.itemView)
         }
         viewHolder
     }
 
-    private fun findRelativeStickyHeaderPosition(firstVisibleItemPosition: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>): Int {
+    private fun findRelativeStickyHeaderPosition(firstVisibleItemPosition: Int, adapter: androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>): Int {
         for (index in firstVisibleItemPosition downTo 0) {
             val itemViewType = adapter.getItemViewType(index)
             if (itemViewType == headerType) {
@@ -121,7 +122,7 @@ class RvStickyHeaderContainer : FrameLayout {
         return -1
     }
 
-    private fun findNextStickyHeaderPosition(firstVisibleItemPosition: Int, adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>): Int {
+    private fun findNextStickyHeaderPosition(firstVisibleItemPosition: Int, adapter: androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>): Int {
         for (index in firstVisibleItemPosition + 1 until adapter.itemCount) {
             val itemViewType = adapter.getItemViewType(index)
             if (itemViewType == headerType) {

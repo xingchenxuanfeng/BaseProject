@@ -1,13 +1,13 @@
 package com.xc.baseproject.basefeature.testtuling
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xc.baseproject.basefeature.R
 import kotlinx.android.synthetic.main.activity_tuling.*
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ class TulingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tuling)
-        recyclerView.layoutManager = LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(getContext(), androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, false)
 
         val tulingViewModel = ViewModelProviders.of(getContext()).get(TulingViewModel::class.java)
         recyclerView.adapter = TulingAdapter(getContext(), tulingViewModel.mChatData.value)
@@ -38,13 +38,13 @@ class TulingActivity : BaseActivity() {
     }
 }
 
-class TulingAdapter(var mContext: Context, var mData: ArrayList<Pair<Boolean, String>>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+class TulingAdapter(var mContext: Context, var mData: ArrayList<Pair<Boolean, String>>?) : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val view = LayoutInflater.from(mContext).inflate(R.layout.recycler_view_item_one_line, parent, false)
-        return object : RecyclerView.ViewHolder(view) {}
+        return object : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {}
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         holder.itemView.textView.autoLinkMask = android.text.util.Linkify.ALL
         mData?.get(position)?.let {
             holder.itemView.textView.text = it.second

@@ -4,10 +4,10 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.support.v7.view.menu.MenuView
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.view.menu.MenuView
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -26,16 +26,16 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
 
-        rv.layoutManager = LinearLayoutManager(getContext())
+        rv.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(getContext())
 
         rv_sticky_header_container.init(TYPE_HEADER)
         rv_sticky_header_container.noHeaderPosition = 45
 
-        rv.addItemDecoration(DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL))
+        rv.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(getContext(), androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
 
         val data = Data.data
-        rv.adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        rv.adapter = object : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
+            override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
                 return if (viewType == TYPE_HEADER) {
                     HeaderHolder(LayoutInflater.from(getContext()).inflate(R.layout.item, parent, false))
                 } else {
@@ -43,7 +43,7 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
                 if (data[position].type == TYPE_HEADER) {
                     holder.itemView.setBackgroundColor(Color.GREEN)
                 } else {
@@ -55,7 +55,7 @@ class MainActivity : BaseActivity() {
                     Toast.makeText(getContext(), "第${position}项 type=${data[position].type} text=${data[position].content}", Toast.LENGTH_SHORT).show()
                     Handler().postDelayed({
                         Data.data.clear()
-                        rv.adapter.notifyDataSetChanged()
+                        rv.adapter?.notifyDataSetChanged()
                     }, 1000)
                 }
             }
@@ -70,6 +70,6 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    class HeaderHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    class ContentHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class HeaderHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
+    class ContentHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView)
 }
