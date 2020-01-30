@@ -81,6 +81,7 @@ obj/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+aliyun-emas-services.json
 
 # Freeline
 freeline.py

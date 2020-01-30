@@ -60,7 +60,7 @@ class ChatActivity : BaseActivity() {
                     data.clear()
                     data.addAllIfNotNull(it)
                     recyclerView.smoothScrollToPosition(Math.max(0, adapter.itemCount - 1))
-                    recyclerView.adapter.notifyDataSetChanged()
+                    recyclerView.adapter?.notifyDataSetChanged()
                 }
         )
         label = intent.getStringExtra(LABEL) ?: label

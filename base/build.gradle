@@ -27,9 +27,9 @@ dependencies {
     api "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     api "com.android.support:support-v4:${rootProject.ext.supportLibVersion}"
     api "com.android.support:recyclerview-v7:${rootProject.ext.supportLibVersion}"
+    api "com.android.support:design:${rootProject.ext.supportLibVersion}"
     api 'com.android.support.constraint:constraint-layout:1.1.3'
     api 'android.arch.lifecycle:extensions:1.1.1'
-    api 'com.android.support:design:27.1.1'
     application project(':app')
     feature project(':basefeature')
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -54,11 +54,14 @@ dependencies {
     api 'me.drakeet.multitype:multitype-kotlin:3.4.4'//update to multitype:4.0.0 when use AndroidX
 
     api 'cn.leancloud.android:avoscloud-sdk:4.7.9'    // LeanCloud 基础包
-    api 'cn.leancloud.android:avoscloud-push:4.7.9@aar'    // 推送与即时通讯需要的包
-    api 'cn.leancloud.android:avoscloud-mixpush:4.7.9@aar'    // Android 混合推送需要的包
-    api 'cn.leancloud.android:avoscloud-feedback:4.7.9@aar'    // LeanCloud 用户反馈包
-    api 'cn.leancloud.android:avoscloud-search:4.7.9@aar'    // LeanCloud 应用内搜索包
+
+//    api 'cn.leancloud.android:avoscloud-push:4.7.9@aar'    // 推送与即时通讯需要的包
+//    api 'cn.leancloud.android:avoscloud-mixpush:4.7.9@aar'    // Android 混合推送需要的包
+//    api 'cn.leancloud.android:avoscloud-feedback:4.7.9@aar'    // LeanCloud 用户反馈包
+//    api 'cn.leancloud.android:avoscloud-search:4.7.9@aar'    // LeanCloud 应用内搜索包
 
     api 'com.timqi.collapsibletextview:library:1.1.2'  //可收缩展开的TextView
+    api 'com.aliyun.ams:alicloud-android-push:3.1.9'
+
 
 }

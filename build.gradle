@@ -7,12 +7,16 @@ buildscript {
         maven {
             url 'https://maven.fabric.io/public'
         }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.1'
+        classpath 'com.android.tools.build:gradle:3.5.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.2.0'
         classpath 'io.fabric.tools:gradle:1.27.0'
+//        classpath 'com.aliyun.ams:emas-services:1.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,11 +28,15 @@ allprojects {
         google()
         jcenter()
         maven {
-            url 'http://developer.huawei.com/repo/'
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
         maven {
             url "http://mvn.leancloud.cn/nexus/content/repositories/public"
         }
+
+//        maven {
+//            url 'http://developer.huawei.com/repo/'
+//        }
     }
 }
 

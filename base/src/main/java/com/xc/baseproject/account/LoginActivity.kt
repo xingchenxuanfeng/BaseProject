@@ -36,8 +36,6 @@ class LoginActivity : BaseActivity() {
                             progress_circular.setVisible(false)
                             login_github.isEnabled = true
                             if (user != null) {
-                                user.put()
-
                                 ToastUtils.showShort("登录成功")
                                 finish()
                             } else {

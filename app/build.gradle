@@ -3,6 +3,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'//必须在app级别apply,在base里apply无效
 apply plugin: 'io.fabric'
 
+//apply plugin: 'com.aliyun.ams.emas-services'
+
 crashlytics {
     enableNdk true
 }
