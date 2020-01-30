@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.basefeature.R
 import kotlinx.android.synthetic.main.main_996_activity.*
@@ -64,6 +65,9 @@ class Main996Activity : BaseActivity() {
         when (item.itemId) {
             R.id.add -> {
                 startActivity(Intent(getContext(), AddNewItemActivity::class.java))
+            }
+            R.id.feedback -> {
+                FeedbackAPI.openFeedbackActivity()
             }
         }
         return true
