@@ -27,6 +27,7 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" /> <!-- 即时通讯模块、推送（均需要加入以下声明） START -->
+
         <!-- 即时通讯模块、推送都要使用 PushService -->
         <service android:name="com.avos.avoscloud.PushService" />
 
@@ -47,6 +48,31 @@
         <activity
             android:name=".account.github.GithubOauthActivity"
             android:label="@string/oauth_github" />
+
+        <!--aliyun 配置-->
+        <meta-data
+            android:name="com.alibaba.app.appkey"
+            android:value="28325271" />
+        <meta-data
+            android:name="com.alibaba.app.appsecret"
+            android:value="f6bffa000b5f82927d1cab9db9d95be6" />
+        <!--aliyun END-->
+
+        <!-- aliyun 消息接收监听器 （用户可自主扩展） -->
+        <receiver
+            android:name="com.xc.baseproject.push.MyMessageReceiver"
+            android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_OPENED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.push2.action.NOTIFICATION_REMOVED" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

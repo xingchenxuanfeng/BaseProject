@@ -7,8 +7,10 @@ import com.crashlytics.android.ndk.CrashlyticsNdk
 import com.xc.baseproject.constants.LEANCLOUD_APP_ID
 import com.xc.baseproject.constants.LEANCLOUD_APP_Key
 import com.xc.baseproject.misc.ReleaseTree
+import com.xc.baseproject.push.PushManager
 import io.fabric.sdk.android.Fabric
 import timber.log.Timber
+
 
 open class BaseApplication : Application() {
 
@@ -24,5 +26,8 @@ open class BaseApplication : Application() {
 
         AVOSCloud.initialize(this, LEANCLOUD_APP_ID, LEANCLOUD_APP_Key)
         AVOSCloud.setDebugLogEnabled(BuildConfig.DEBUG)
+
+        PushManager.init(this)
     }
+
 }

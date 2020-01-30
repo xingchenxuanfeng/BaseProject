@@ -16,7 +16,7 @@
         android:gravity="start|center_vertical"
         android:padding="16dp"
         android:text="@string/login_with_github"
-        android:textColor="@color/avoscloud_feedback_white"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
