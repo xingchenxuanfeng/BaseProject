@@ -8,6 +8,7 @@ import com.crashlytics.android.ndk.CrashlyticsNdk
 import com.xc.baseproject.analytics.AnalyticsManager
 import com.xc.baseproject.constants.LEANCLOUD_APP_ID
 import com.xc.baseproject.constants.LEANCLOUD_APP_Key
+import com.xc.baseproject.hotpatch.HotpatchManager
 import com.xc.baseproject.misc.ReleaseTree
 import com.xc.baseproject.push.PushManager
 import io.fabric.sdk.android.Fabric
@@ -35,6 +36,8 @@ open class BaseApplication : Application() {
         AnalyticsManager.init()
         PushManager.init(this)
         FeedbackAPI.init(this, aliyunAppKey, aliyunAppSecret)
+
+        HotpatchManager.queryAndLoadNewPatch()
     }
 
 }
