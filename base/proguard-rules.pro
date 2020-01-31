@@ -24,7 +24,7 @@
 #---------------------------------基本指令区----------------------------------
 -optimizationpasses 5
 -dontskipnonpubliclibraryclassmembers
-#-printmapping proguardMapping.txt #移除改行，让firebase Crashlytics可自动上传映射文件  https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?authuser=0
+#-printmapping proguardMapping.txt #移除该行，让firebase Crashlytics可自动上传映射文件  https://firebase.google.com/docs/crashlytics/get-deobfuscated-reports?authuser=0
 -optimizations !code/simplification/cast,!field/*,!class/merging/*
 -keepattributes *Annotation*,InnerClasses
 -keepattributes Signature
@@ -277,3 +277,29 @@
 -dontwarn com.ut.**
 -keep class com.ta.** {*;}
 -dontwarn com.ta.**
+
+#aliyun analytics
+-keep class com.alibaba.sdk.android.**{*;}
+-keep class com.ut.**{*;}
+-keep class com.ta.**{*;}
+
+#aliyun hotfix
+#基线包使用，生成mapping.txt
+-printmapping mapping.txt
+#生成的mapping.txt在app/build/outputs/mapping/release路径下，移动到/app路径下
+#修复后的项目使用，保证混淆结果一致
+#-applymapping mapping.txt
+#hotfix
+-keep class com.taobao.sophix.**{*;}
+-keep class com.ta.utdid2.device.**{*;}
+-dontwarn com.alibaba.sdk.android.utils.**
+#防止inline
+-dontoptimize
+-keepclassmembers class * extends android.app.Application {
+    public <init>();
+}
+#-keepclassmembers class com.my.pkg.MyRealApplication {
+#    public <init>();
+#}
+# 如果不使用android.support.annotation.Keep则需加上此行
+# -keep class com.my.pkg.SophixStubApplication$RealApplicationStub
