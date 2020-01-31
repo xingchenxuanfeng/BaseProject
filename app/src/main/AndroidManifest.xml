@@ -6,6 +6,8 @@
         android:allowBackup="false"
         android:icon="@drawable/ic_android_24dp"
         android:label="@string/app_name"
-        tools:replace="android:icon,android:label,android:allowBackup"></application>
+        tools:replace="android:icon,android:label,android:allowBackup">
+
+    </application>
 
 </manifest>

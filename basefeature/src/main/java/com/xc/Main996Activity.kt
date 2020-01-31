@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
+import com.blankj.utilcode.util.ToastUtils
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.basefeature.R
 import kotlinx.android.synthetic.main.main_996_activity.*
@@ -34,6 +35,7 @@ class Main996Activity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         refreshData()
+//        ToastUtils.showShort("testhotfix")
     }
 
     private fun initView() {
