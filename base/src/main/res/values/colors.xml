@@ -41,7 +41,6 @@
     <color name="Beige">#F5F5DC</color>
     <color name="Bisque">#FFE4C4</color>
     <color name="BlanchedAlmond">#FFEBCD</color>
-    <color name="Blue">#0000FF</color>
     <color name="BlueViolet">#8A2BE2</color>
     <color name="Brown">#A52A2A</color>
     <color name="BurlyWood">#DEB887</color>
@@ -136,8 +135,6 @@
     <color name="olive">#808000</color>
     <color name="Olive">#808000</color>
     <color name="OliveDrab">#6B8E23</color>
-    <color name="Orange">#FFA500</color>
-    <color name="OrangeRed">#FF4500</color>
     <color name="Orchid">#DA70D6</color>
     <color name="PaleGoldenrod">#EEE8AA</color>
     <color name="PaleGreen">#98FB98</color>

@@ -8,39 +8,19 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:allowBackup="false"
         android:icon="@drawable/ic_android_24dp"
-        android:label="@string/app_name"
         android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
-        <activity android:name="xc.baseproject.app.ui.testmain.MainActivity">
-            <intent-filter android:order="1">
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <data
-                    android:host="xc.com"
-                    android:pathPattern="/.*"
-                    android:scheme="https" />
-            </intent-filter>
+        <activity android:name="xc.baseproject.app.YiqingInfoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.xc.Main996Activity">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.DEFAULT" />-->
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
-        <activity android:name="xc.AddNewItemActivity" />
     </application>
 
 </manifest>
