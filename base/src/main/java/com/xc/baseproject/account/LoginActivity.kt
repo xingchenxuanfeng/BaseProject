@@ -5,7 +5,6 @@ import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVUser
 import com.avos.avoscloud.LogInCallback
 import com.blankj.utilcode.util.ToastUtils
-import com.crashlytics.android.Crashlytics
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.account.github.GithubAuthListener
 import com.xc.baseproject.account.github.GithubOauth

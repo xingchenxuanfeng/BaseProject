@@ -4,17 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
-import com.blankj.utilcode.util.ToastUtils
 import com.xc.baseproject.BaseActivity
-import com.xc.baseproject.basefeature.R
+import com.xc.baseproject.app.R
 import kotlinx.android.synthetic.main.main_996_activity.*
 import me.drakeet.multitype.MultiTypeAdapter
 import me.drakeet.multitype.register
 import org.greenrobot.eventbus.Subscribe
+import xc.AddNewItemActivity
 
 /**
  * @author xc
@@ -41,7 +40,7 @@ class Main996Activity : BaseActivity() {
     private fun initView() {
         setTitle(R.string.main_label)
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
-        rv_main.layoutManager = LinearLayoutManager(getContext())
+        rv_main.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(getContext())
         adapter.register(VoteModel::class, MainViewHolder())
         rv_main.adapter = adapter
     }

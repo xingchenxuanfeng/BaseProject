@@ -7,7 +7,7 @@ import com.xc.VoteModel.Companion.VOTE_STATE_NONE
 import com.xc.VoteModel.Companion.VOTE_STATE_UP
 import com.xc.baseproject.AppUtil
 import com.xc.baseproject.account.LoginActivity
-import com.xc.baseproject.basefeature.R
+import com.xc.baseproject.app.R
 import com.xc.baseproject.chat.ChatActivity
 import com.xc.baseproject.multiTypeAdapter.MultiBaseViewHolder
 import com.xc.baseproject.multiTypeAdapter.MultiCommonViewHolder

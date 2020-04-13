@@ -18,7 +18,10 @@ object AppUtil {
     fun tryGetCurrentUser(): AVUser? {
         val currentUser: AVUser? = AVUser.getCurrentUser()
         if (currentUser == null) {
-            appContext.startActivity(Intent(appContext, LoginActivity::class.java))
+            val intent: Intent = Intent(appContext,
+                    LoginActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            appContext.startActivity(intent)
             return null
         }
         return currentUser

@@ -8,16 +8,18 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name="com.xc.baseproject.hotpatch.SophixStubApplication"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
+        tools:ignore="GoogleAppIndexingWarning,UnusedAttribute"
         tools:replace="android:icon,android:allowBackup">
         <activity android:name=".chat.ChatActivity" />
 
@@ -28,16 +30,6 @@
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"
             android:value="false" />
-
-        <!-- 即时通讯模块 START -->
-        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            </intent-filter>
-        </receiver>
-        <!-- 即时通讯模块、推送 END -->
 
         <activity
             android:name=".account.LoginActivity"
@@ -58,7 +50,7 @@
             android:value="mainChannel" />
         <!--aliyun END-->
 
-        <!-- aliyun 消息接收监听器 （用户可自主扩展） -->
+        <!-- aliyun push -->
         <receiver
             android:name="com.xc.baseproject.push.MyMessageReceiver"
             android:exported="false"> <!-- 为保证receiver安全，建议设置不可导出，如需对其他应用开放可通过android：permission进行限制 -->
@@ -72,7 +64,11 @@
                 <action android:name="com.alibaba.sdk.android.push.RECEIVE" />
             </intent-filter>
         </receiver>
+        <activity
+            android:name="com.xc.baseproject.push.PopupPushActivity"
+            android:exported="true" />
 
+        <!-- aliyun push END-->
     </application>
 
 </manifest>

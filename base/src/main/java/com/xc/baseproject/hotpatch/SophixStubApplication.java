@@ -2,7 +2,7 @@ package com.xc.baseproject.hotpatch;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.annotation.Keep;
+import androidx.annotation.Keep;
 import android.util.Log;
 
 import com.taobao.sophix.PatchStatus;

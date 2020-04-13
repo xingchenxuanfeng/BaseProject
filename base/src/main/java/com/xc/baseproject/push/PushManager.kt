@@ -7,10 +7,11 @@ import android.graphics.Color
 import android.os.Build
 import com.alibaba.sdk.android.push.CommonCallback
 import com.alibaba.sdk.android.push.noonesdk.PushServiceFactory
+import com.alibaba.sdk.android.push.register.MiPushRegister
 import timber.log.Timber
 
 object PushManager {
-    const val ChannelID = "1"
+    const val ChannelID = "com.xc.baseproject"
 
     fun init(applicationContext: Context) {
         initCloudChannel(applicationContext)
@@ -35,6 +36,9 @@ object PushManager {
                 Timber.d("init cloudchannel failed -- errorcode:$errorCode -- errorMessage:$errorMessage")
             }
         })
+
+        MiPushRegister.register(applicationContext, "2882303761518316564", "5421831622564")
+
     }
 
     private fun createNotificationChannel(applicationContext: Context) {

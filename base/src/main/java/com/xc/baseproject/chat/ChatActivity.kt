@@ -1,10 +1,10 @@
 package com.xc.baseproject.chat
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.R
 import com.xc.baseproject.extFunctions.addAllIfNotNull
@@ -43,7 +43,7 @@ class ChatActivity : BaseActivity() {
         title = label
         tip_tv.text = tip
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
-        val linearLayoutManager = LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, latestOnTop)
+        val linearLayoutManager = androidx.recyclerview.widget.LinearLayoutManager(getContext(), androidx.recyclerview.widget.LinearLayoutManager.VERTICAL, latestOnTop)
         linearLayoutManager.stackFromEnd = latestOnTop
         recyclerView.layoutManager = linearLayoutManager
 

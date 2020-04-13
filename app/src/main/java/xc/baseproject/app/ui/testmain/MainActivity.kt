@@ -1,8 +1,8 @@
-package com.xc.baseproject.basefeature.ui.testmain
+package xc.baseproject.app.ui.testmain
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.xc.baseproject.basefeature.R
+import com.xc.baseproject.app.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,7 +1,7 @@
 package com.xc.baseproject.misc
 
 import android.util.Log
-import com.crashlytics.android.Crashlytics
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import timber.log.Timber
 import java.lang.RuntimeException
 
@@ -13,17 +13,19 @@ class ReleaseTree : Timber.DebugTree() {
     }
 
     override fun e(t: Throwable?) {
-        Crashlytics.logException(t)
         super.e(t)
-    }
-
-    override fun e(t: Throwable?, message: String?, vararg args: Any?) {
-        Crashlytics.logException(RuntimeException(message + args.toString(), t))
-        super.e(t, message, *args)
+        FirebaseCrashlytics.getInstance().recordException(t ?: return)
     }
 
     override fun e(message: String?, vararg args: Any?) {
-        Crashlytics.logException(RuntimeException(message + args.toString()))
         super.e(message, *args)
+        FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString()))
     }
+
+    override fun e(t: Throwable?, message: String?, vararg args: Any?) {
+        super.e(t, message, *args)
+        FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString(), t))
+
+    }
+
 }

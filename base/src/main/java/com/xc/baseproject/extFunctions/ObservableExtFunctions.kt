@@ -1,7 +1,6 @@
 package com.xc.baseproject.extFunctions
 
 import android.util.Log
-import com.crashlytics.android.Crashlytics
 import com.google.android.gms.common.internal.ApiExceptionUtil
 import io.reactivex.Observable
 import io.reactivex.ObservableSource

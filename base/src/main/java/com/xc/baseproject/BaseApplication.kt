@@ -3,15 +3,15 @@ package com.xc.baseproject
 import android.app.Application
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
 import com.avos.avoscloud.AVOSCloud
-import com.crashlytics.android.Crashlytics
-import com.crashlytics.android.ndk.CrashlyticsNdk
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.analytics.AnalyticsManager
 import com.xc.baseproject.constants.LEANCLOUD_APP_ID
 import com.xc.baseproject.constants.LEANCLOUD_APP_Key
 import com.xc.baseproject.hotpatch.HotpatchManager
 import com.xc.baseproject.misc.ReleaseTree
 import com.xc.baseproject.push.PushManager
-import io.fabric.sdk.android.Fabric
+import io.reactivex.functions.Consumer
+import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 
 const val aliyunAppKey = "28325271"
@@ -28,8 +28,6 @@ open class BaseApplication : Application() {
         } else {
             Timber.plant(ReleaseTree())
         }
-        Fabric.with(this.applicationContext, Crashlytics(), CrashlyticsNdk())
-
         AVOSCloud.initialize(this, LEANCLOUD_APP_ID, LEANCLOUD_APP_Key)
         AVOSCloud.setDebugLogEnabled(BuildConfig.DEBUG)
 
@@ -38,6 +36,11 @@ open class BaseApplication : Application() {
         FeedbackAPI.init(this, aliyunAppKey, aliyunAppSecret)
 
         HotpatchManager.queryAndLoadNewPatch()
+        RxJavaPlugins.setErrorHandler {
+            Timber.e(it, "RxJavaException")
+            throw it
+        }
+
     }
 
 }

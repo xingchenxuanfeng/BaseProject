@@ -1,13 +1,16 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'com.google.gms.google-services'//必须在app级别apply,在base里apply无效
-apply plugin: 'io.fabric'
+//apply plugin: 'io.fabric'
+apply plugin: 'com.google.firebase.crashlytics'
 
 //apply plugin: 'com.aliyun.ams.emas-services'
 
-crashlytics {
-    enableNdk true
-}
+//crashlytics {
+//    enableNdk true
+//}
 
 apply from: rootProject.file('commen.gradle')
 android {
@@ -34,6 +37,16 @@ android {
             shrinkResources true  //移出无用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            firebaseCrashlytics {
+                // Enable processing and uploading of native symbols to Crashlytics
+                // servers. By default, this is disabled to improve build speeds.
+                // This flag must be enabled to see properly-symbolicated native
+                // stack traces in the Crashlytics dashboard.
+                nativeSymbolUploadEnabled true
+
+//                strippedNativeLibsDir ‘path/to/stripped/parent/dir’
+//                unstrippedNativeLibsDir ‘path/to/unstripped/parent/dir’
+            }
         }
         debug {
             ext.alwaysUpdateBuildId = false
@@ -43,6 +56,5 @@ android {
 }
 
 dependencies {
-    implementation project(':basefeature')
     implementation project(':base')
 }

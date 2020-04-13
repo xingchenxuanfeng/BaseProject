@@ -61,6 +61,7 @@ object ChatRepository {
 
 data class TestTulingResponse(val code: String, val charge: Boolean, val msg: String, val result: Result)
 data class Result(val code: Int, val text: String)
+
 @AVClassName("ChatMessage")
 class ChatMessage : Serializable, AVObject() {
     var message: String

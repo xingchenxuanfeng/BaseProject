@@ -1,17 +1,16 @@
-package com.xc.baseproject.basefeature.ui.testmain
+package xc.baseproject.app.ui.testmain
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.xc.baseproject.basefeature.R
+import com.xc.baseproject.app.R
 import com.xc.baseproject.chat.ChatActivity
 import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment() {
+class MainFragment : androidx.fragment.app.Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()

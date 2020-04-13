@@ -2,7 +2,7 @@ package com.xc.baseproject
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
