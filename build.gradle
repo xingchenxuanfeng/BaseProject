@@ -3,23 +3,35 @@
 buildscript {
     repositories {
         maven {
-            url 'https://maven.aliyun.com/repository/public/'
+            url 'https://maven.aliyun.com/repository/google'
         }
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+//        maven {
+//            url 'https://maven.aliyun.com/repository/gradle-plugin'
+//        }
+
+        maven {
+            url 'https://maven.aliyun.com/repository/releases'
+        }
+
         google()
         jcenter()
 //        maven {
 //            url 'https://maven.fabric.io/public'
 //        }
-        maven {
-            url 'https://maven.aliyun.com/repository/releases'
-        }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:3.6.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.3'
 //        classpath 'io.fabric.tools:gradle:1.27.0'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0-beta04'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.0.0'
 //        classpath 'com.aliyun.ams:emas-services:1.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -30,16 +42,28 @@ buildscript {
 allprojects {
     repositories {
         maven {
-            url 'https://maven.aliyun.com/repository/public/'
+            url 'https://maven.aliyun.com/repository/google'
         }
-        google()
-        jcenter()
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+//        maven {
+//            url 'https://maven.aliyun.com/repository/gradle-plugin'
+//        }
+
         maven {
             url 'https://maven.aliyun.com/repository/releases'
         }
-        maven {
-            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
-        }
+
+        google()
+        jcenter()
+
+//        maven {
+//            url "http://mvn.leancloud.cn/nexus/content/repositories/public"
+//        }
 
 //        maven {
 //            url 'http://developer.huawei.com/repo/'
