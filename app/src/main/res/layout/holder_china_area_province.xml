@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="1dp"
+        android:background="@color/GhostWhite"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/provinceName"
+            style="@style/textViewCell"
+            android:drawableEnd="@drawable/ic_expand_more_15dp"
+            android:text="黑龙江" />
+
+        <TextView
+            android:id="@+id/currentConfirmCount"
+            style="@style/textViewCell"
+            android:text="173" />
+
+        <TextView
+            android:id="@+id/accumulateConfirmCount"
+            style="@style/textViewCell"
+            android:text="944" />
+
+        <TextView
+            android:id="@+id/deadCount"
+            style="@style/textViewCell"
+            android:text="13" />
+
+        <TextView
+            android:id="@+id/curedCount"
+            style="@style/textViewCell"
+            android:text="758" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/citiesRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

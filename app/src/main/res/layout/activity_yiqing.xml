@@ -31,6 +31,7 @@
                 android:text="更新时间:" />
 
             <TextView
+                android:id="@+id/updateDataTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2020-02-05" />
@@ -64,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <include layout="@layout/china_confirmed" />
+                <include layout="@layout/china_current_confirmed" />
 
                 <Space
                     android:layout_width="0dp"
@@ -90,6 +91,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <include layout="@layout/china_accumulate_confirmed" />
 
                 <Space
                     android:layout_width="0dp"
@@ -147,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <include layout="@layout/global_accumulate_confirmed" />
+                <include layout="@layout/global_cured" />
 
                 <Space
                     android:layout_width="0dp"
@@ -165,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <include layout="@layout/global_cured" />
+                <include layout="@layout/global_accumulate_confirmed" />
 
                 <Space
                     android:layout_width="0dp"
@@ -195,27 +203,50 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:nestedScrollingEnabled="false"
+            android:padding="5dp"
             android:text="国内省市数据"
             android:textColor="@color/blue"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tendImagesRv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chinaAreaDataRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="5dp"
+            android:padding="5dp"
             android:text="全球疫情数据"
             android:textColor="@color/blue"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/areaDataRv"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:descendantFocusability="blocksDescendants">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/globalAreaDataRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="数据来自互联网" />
     </LinearLayout>
 </ScrollView>

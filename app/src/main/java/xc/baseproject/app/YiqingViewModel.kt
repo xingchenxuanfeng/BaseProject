@@ -18,7 +18,7 @@ class YiqingViewModel : ViewModel() {
     val yiqingLiveData: MutableLiveData<YiqingModel> = MutableLiveData()
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private val yiqingNetService by lazy { NetService.testRetrofit.create(YiqingNetService::class.java) }
+    private val yiqingNetService by lazy { NetService.aliYunRetrofit.create(YiqingNetService::class.java) }
 
     override fun onCleared() {
         super.onCleared()
@@ -36,7 +36,7 @@ class YiqingViewModel : ViewModel() {
 
     interface YiqingNetService {
 
-        @GET("2016-08-15/proxy/yiqing/getinfo")
+        @GET("yiqing/getinfo")
         fun getInfo(@Query("raw") raw: Boolean): Observable<YiqingModel>
     }
 }

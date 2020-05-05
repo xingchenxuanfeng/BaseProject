@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/countryName"
+        style="@style/textViewCell"
+        android:text="法国" />
+
+    <TextView
+        android:id="@+id/currentConfirmedCount"
+        style="@style/textViewCell"
+        android:text="54700" />
+
+    <TextView
+        android:id="@+id/deadRate"
+        style="@style/textViewCell"
+        android:text="19.20%" />
+
+    <TextView
+        android:id="@+id/deadRateRank"
+        style="@style/textViewCell"
+        android:layout_width="20dp"
+        android:text="1" />
+
+    <TextView
+        android:id="@+id/deadCount"
+        style="@style/textViewCell"
+        android:text="25531" />
+
+    <TextView
+        android:id="@+id/deadCountRank"
+        style="@style/textViewCell"
+        android:layout_width="20dp"
+        android:text="5" />
+
+    <TextView
+        android:id="@+id/confirmedCount"
+        style="@style/textViewCell"
+        android:text="132967" />
+
+    <TextView
+        android:id="@+id/confirmedCountRank"
+        style="@style/textViewCell"
+        android:layout_width="20dp"
+        android:text="7" />
+</LinearLayout>

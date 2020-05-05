@@ -8,16 +8,17 @@
     tools:showIn="@layout/activity_yiqing">
 
     <TextView
+        android:id="@+id/china_dead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="20486"
+        android:text="0"
         android:textColor="@color/gray"
         android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="死亡病例"
+        android:text="累计死亡病例"
         android:textColor="@color/black"
         android:textStyle="bold" />
 
@@ -28,13 +29,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="昨日新增"
+            android:text="较昨日"
             android:textSize="8sp" />
 
         <TextView
+            android:id="@+id/china_dead_incr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3235"
+            android:text="0"
             android:textColor="@color/gray"
             android:textSize="8sp" />
 

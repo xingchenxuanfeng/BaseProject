@@ -1,11 +1,15 @@
 package xc.baseproject.app
 
+import io.reactivex.functions.Action
+
 data class YiqingModel(
+        val currentConfirmedCount: Long,
         val confirmedCount: Long,
         val suspectedCount: Long,
         val curedCount: Long,
         val deadCount: Long,
         val seriousCount: Long,
+        val currentConfirmedIncr: Long,
         val confirmedIncr: Long,
         val suspectedIncr: Long,
         val curedIncr: Long,
@@ -13,7 +17,9 @@ data class YiqingModel(
         val seriousIncr: Long,
         val globalStatistics: GlobalStatistics,
         val areaStat: List<AreaStat>,
-        val globalAreaStat: List<GlobalAreaStat>
+        val globalAreaStat: List<GlobalAreaStat>,
+        val getCount: Long,
+        val updateTime: Long
 )
 
 data class AreaStat(
@@ -96,4 +102,8 @@ data class GlobalStatistics(
         val confirmedIncr: Long,
         val curedIncr: Long,
         val deadIncr: Long
+)
+
+data class SeeAllItemData(
+        val action: Action
 )
