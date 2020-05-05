@@ -13,12 +13,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 object NetService {
     private val baseOkHttpClient: OkHttpClient
     private val baseRetrofit: Retrofit
+    val testRetrofit: Retrofit
     val wayJdRetrofit: Retrofit
     var githubRetrofit: Retrofit
 
     const val wayJdApiAppKey = "e4388cc76bf9529e6e29a938cbdf839d"
     private const val baseUrl = "https://localhost/"
 
+    private const val testApiUrl = "http://192.168.199.167:8000/"
     private const val baseWayJdApiUrl = "https://way.jd.com/"
     private const val baseGithubApiUrl = "https://api.github.com/"
 
@@ -33,6 +35,10 @@ object NetService {
         retrofitBuilder.addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
         retrofitBuilder.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
         baseRetrofit = retrofitBuilder.build()
+
+        testRetrofit = baseRetrofit.newBuilder()
+                .baseUrl(testApiUrl)
+                .build()
 
         wayJdRetrofit = baseRetrofit.newBuilder()
                 .baseUrl(baseWayJdApiUrl)
