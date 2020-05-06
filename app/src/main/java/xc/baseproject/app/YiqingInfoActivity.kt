@@ -1,5 +1,6 @@
 package xc.baseproject.app
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,7 @@ import com.xc.baseproject.app.R
 import com.xc.baseproject.extFunctions.toStringWithSign
 import io.reactivex.functions.Action
 import kotlinx.android.synthetic.main.activity_yiqing.*
+import kotlinx.android.synthetic.main.activity_yiqing.sp_layout
 import kotlinx.android.synthetic.main.china_accumulate_confirmed.*
 import kotlinx.android.synthetic.main.china_cured.*
 import kotlinx.android.synthetic.main.china_current_confirmed.*
@@ -33,15 +35,19 @@ class YiqingInfoActivity : BaseActivity() {
         yiqingViewModel = ViewModelProvider(this)[YiqingViewModel::class.java]
 
         initObserver()
-
-        yiqingViewModel.updateData()
-
     }
 
     private fun initObserver() {
+        sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
+        sp_layout.setOnRefreshListener {
+            yiqingViewModel.updateData()
+        }
+
         yiqingViewModel.yiqingLiveData.observe(this, Observer { data ->
 
             Timber.d("yiqing data:$data")
+
+            sp_layout.isRefreshing = false
 
             bindStatusData(data)
 
