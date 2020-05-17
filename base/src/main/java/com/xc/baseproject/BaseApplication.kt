@@ -3,14 +3,13 @@ package com.xc.baseproject
 import android.app.Application
 import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
 import com.avos.avoscloud.AVOSCloud
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.analytics.AnalyticsManager
 import com.xc.baseproject.constants.LEANCLOUD_APP_ID
 import com.xc.baseproject.constants.LEANCLOUD_APP_Key
+import com.xc.baseproject.crash.HighAvailableManager
 import com.xc.baseproject.hotpatch.HotpatchManager
 import com.xc.baseproject.misc.ReleaseTree
 import com.xc.baseproject.push.PushManager
-import io.reactivex.functions.Consumer
 import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
 
@@ -28,10 +27,12 @@ open class BaseApplication : Application() {
         } else {
             Timber.plant(ReleaseTree())
         }
+        AnalyticsManager.init()
+        HighAvailableManager.init()
+
         AVOSCloud.initialize(this, LEANCLOUD_APP_ID, LEANCLOUD_APP_Key)
         AVOSCloud.setDebugLogEnabled(BuildConfig.DEBUG)
 
-        AnalyticsManager.init()
         PushManager.init(this)
         FeedbackAPI.init(this, aliyunAppKey, aliyunAppSecret)
 

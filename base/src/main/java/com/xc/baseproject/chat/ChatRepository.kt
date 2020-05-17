@@ -1,7 +1,7 @@
 package com.xc.baseproject.chat
 
 import com.avos.avoscloud.*
-import com.xc.baseproject.AppUtil
+import com.xc.baseproject.account.AccountManager
 import com.xc.baseproject.net.NetService
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -10,7 +10,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import java.io.Serializable
 import java.util.*
-import java.util.concurrent.Callable
 
 object ChatRepository {
     init {
@@ -41,7 +40,7 @@ object ChatRepository {
     fun postMessage(message: String): Observable<ChatMessage> {
         return Observable.create(object : ObservableOnSubscribe<ChatMessage> {
             override fun subscribe(emitter: ObservableEmitter<ChatMessage>) {
-                val currentUser = AppUtil.tryGetCurrentUser() ?: return
+                val currentUser = AccountManager.tryGetCurrentUser() ?: return
 
                 val chatMessage = ChatMessage()
                 chatMessage.message = message

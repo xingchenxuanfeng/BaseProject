@@ -26,10 +26,6 @@
         <meta-data
             android:name="aia-compat-api-min-version"
             android:value="1" />
-        <!-- 手动初始化firebase Crashlytics sdk ,ndk crash 必须要手动初始化-->
-        <meta-data
-            android:name="firebase_crashlytics_collection_enabled"
-            android:value="false" />
 
         <activity
             android:name=".account.LoginActivity"

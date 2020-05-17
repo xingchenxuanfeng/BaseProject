@@ -321,3 +321,70 @@
 # 魅族通道
 -keep class com.meizu.cloud.** {*;}
 -dontwarn com.meizu.cloud.**
+
+#keep crashreporter
+-keep class com.alibaba.motu.crashreporter.MotuCrashReporter{ *;}
+-keep class com.alibaba.motu.crashreporter.ReporterConfigure{*;}
+-keep class com.alibaba.motu.crashreporter.utrestapi.UTRestReq{*;}
+-keep interface com.alibaba.motu.crashreporter.IUTCrashCaughtListener{*;}
+-keep interface com.alibaba.motu.crashreporter.ICrashReportSendListener{*;}
+-keep interface com.alibaba.motu.crashreporter.ICrashReportDataListener{*;}
+-keep interface com.ut.mini.crashhandler.*{*;}
+-keep class com.uc.crashsdk.**{*;}
+-keep class com.alibaba.motu.crashreporter.YouKuCrashReporter{public *;}
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+
+#keep apm
+-keep class com.taobao.monitor.APMLauncher{*;}
+-keep class com.taobao.monitor.impl.logger.Logger{*;}
+-keep class com.taobao.monitor.impl.logger.IDataLogger{*;}
+-keep class com.taobao.monitor.impl.data.AbsWebView{*;}
+-keep class com.taobao.monitor.impl.data.GlobalStats{*;}
+-keep class com.taobao.monitor.impl.common.Global{*;}
+-keep class com.taobao.monitor.impl.data.WebViewProxy{*;}
+-keep class com.taobao.monitor.impl.logger.Logger{*;}
+-keep class com.taobao.monitor.impl.processor.pageload.IProcedureManager{*;}
+-keep class com.taobao.monitor.impl.processor.pageload.ProcedureManagerSetter{*;}
+-keep class com.taobao.monitor.impl.util.TimeUtils{*;}
+-keep class com.taobao.monitor.impl.util.TopicUtils{*;}
+-keep class com.taobao.monitor.impl.common.DynamicConstants{*;}
+-keep class com.taobao.application.common.data.DeviceHelper{*;}
+-keep class com.taobao.application.common.impl.AppPreferencesImpl{*;}
+-keep class com.taobao.monitor.impl.processor.launcher.PageList{*;}
+-keep class com.taobao.monitor.impl.processor.fragmentload.FragmentInterceptorProxy{*;}
+-keep class com.taobao.monitor.impl.processor.fragmentload.IFragmentInterceptor{*;}
+-keep class com.taobao.monitor.impl.logger.DataLoggerUtils{*;}
+-keep interface com.taobao.monitor.impl.data.IWebView{*;}
+-keep interface com.taobao.monitor.impl.processor.IProcessor{*;}
+-keep interface com.taobao.monitor.impl.processor.IProcessorFactory{*;}
+-keep interface com.taobao.monitor.impl.logger.IDataLogger{*;}
+-keep interface com.taobao.monitor.impl.trace.IDispatcher{*;}
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
+
+#keep tlog
+-keep interface com.taobao.tao.log.ITLogController{*;}
+-keep class com.taobao.tao.log.upload.*{*;}
+-keep class com.taobao.tao.log.message.*{*;}
+-keep class com.taobao.tao.log.LogLevel{*;}
+-keep class com.taobao.tao.log.TLog{*;}
+-keep class com.taobao.tao.log.TLogConstant{*;}
+-keep class com.taobao.tao.log.TLogController{*;}
+-keep class com.taobao.tao.log.TLogInitializer{public *;}
+-keep class com.taobao.tao.log.TLogUtils{public *;}
+-keep class com.taobao.tao.log.TLogNative{*;}
+-keep class com.taobao.tao.log.TLogNative$*{*;}
+-keep class com.taobao.tao.log.CommandDataCenter{*;}
+-keep class com.taobao.tao.log.task.PullTask{*;}
+-keep class com.taobao.tao.log.task.UploadFileTask{*;}
+-keep class com.taobao.tao.log.upload.LogFileUploadManager{public *;}
+-keep class com.taobao.tao.log.monitor.**{*;}
+#兼容godeye
+-keep class com.taobao.tao.log.godeye.core.module.*{*;}
+-keep class com.taobao.tao.log.godeye.GodeyeInitializer{*;}
+-keep class com.taobao.tao.log.godeye.GodeyeConfig{*;}
+-keep class com.taobao.tao.log.godeye.core.control.Godeye{*;}
+-keep interface com.taobao.tao.log.godeye.core.GodEyeAppListener{*;}
+-keep interface com.taobao.tao.log.godeye.core.GodEyeReponse{*;}
+-keep interface com.taobao.tao.log.godeye.api.file.FileUploadListener{*;}
+-keep public class * extends com.taobao.android.tlog.protocol.model.request.base.FileInfo{*;}
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
