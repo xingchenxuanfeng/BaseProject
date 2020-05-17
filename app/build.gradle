@@ -14,6 +14,15 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 apply from: rootProject.file('common.gradle')
 android {
+    signingConfigs {
+        defaultConfig {
+            keyAlias rootProject.ext.keyAlias
+            keyPassword rootProject.ext.keyPassword
+            storeFile rootProject.file(rootProject.ext.storeFile)
+            storePassword rootProject.ext.storePassword
+        }
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion as int
     defaultConfig {
         applicationId "com.xc.baseproject"
@@ -21,14 +30,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.versionName
-    }
-    signingConfigs {
-        release {
-            keyAlias rootProject.ext.keyAlias
-            keyPassword rootProject.ext.keyPassword
-            storeFile rootProject.file(rootProject.ext.storeFile)
-            storePassword rootProject.ext.storePassword
-        }
+        signingConfig signingConfigs.defaultConfig
     }
     buildTypes {
         release {
@@ -36,7 +38,6 @@ android {
             zipAlignEnabled true  //压缩优化
             shrinkResources true  //移出无用资源
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
             firebaseCrashlytics {
                 // Enable processing and uploading of native symbols to Crashlytics
                 // servers. By default, this is disabled to improve build speeds.
