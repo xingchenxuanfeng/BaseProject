@@ -2,6 +2,7 @@ package com.xc.baseproject.net
 
 import com.google.gson.GsonBuilder
 import com.xc.baseproject.BuildConfig
+import com.zhy.http.okhttp.OkHttpUtils
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -51,6 +52,11 @@ object NetService {
         aliYunRetrofit = baseRetrofit.newBuilder()
                 .baseUrl(baseAliYunApiUrl)
                 .build()
+
+    }
+
+    fun init() {
+        OkHttpUtils.initClient(baseOkHttpClient)//给OkHttpUtils装入统一的 OkHttpClient 实例
     }
 
 }

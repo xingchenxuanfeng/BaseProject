@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import com.avos.avoscloud.AVUser
 import com.ut.device.UTDevice
 import com.xc.baseproject.account.LoginActivity
 

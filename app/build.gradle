@@ -31,6 +31,9 @@ android {
         versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.versionName
         signingConfig signingConfigs.defaultConfig
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+        }
     }
     buildTypes {
         release {

@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.TimeUtils
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.app.R
 import com.xc.baseproject.extFunctions.toStringWithSign
+import com.xc.baseproject.update.UpdateManager
 import io.reactivex.functions.Action
 import kotlinx.android.synthetic.main.activity_yiqing.*
 import kotlinx.android.synthetic.main.activity_yiqing.sp_layout
@@ -35,6 +36,8 @@ class YiqingInfoActivity : BaseActivity() {
         yiqingViewModel = ViewModelProvider(this)[YiqingViewModel::class.java]
 
         initObserver()
+
+        UpdateManager.checkUpdate(this)
     }
 
     private fun initObserver() {

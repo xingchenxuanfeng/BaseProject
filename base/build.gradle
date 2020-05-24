@@ -84,4 +84,8 @@ dependencies {
     api 'com.aliyun.ams:huawei-push:2.6.3.305'
     api 'com.aliyun.ams:huawei-push-base:2.6.3.305'
 
+    api 'com.qianwen:update-app:3.5.2'
+    api 'com.qianwen:update-app-kotlin:1.2.3'
+    api 'com.qianwen:okhttp-utils:3.8.0'
+
 }

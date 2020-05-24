@@ -9,6 +9,7 @@ import com.xc.baseproject.constants.LEANCLOUD_APP_Key
 import com.xc.baseproject.crash.HighAvailableManager
 import com.xc.baseproject.hotpatch.HotpatchManager
 import com.xc.baseproject.misc.ReleaseTree
+import com.xc.baseproject.net.NetService
 import com.xc.baseproject.push.PushManager
 import io.reactivex.plugins.RxJavaPlugins
 import timber.log.Timber
@@ -42,6 +43,7 @@ open class BaseApplication : Application() {
             throw it
         }
 
+        NetService.init()
     }
 
 }

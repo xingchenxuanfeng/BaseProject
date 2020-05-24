@@ -7,6 +7,8 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.vector.update_app_kotlin.updateApp
+import com.xc.baseproject.update.UpdateAppHttpUtil
 import kotlinx.android.synthetic.main.base_activity_layout.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

@@ -5,6 +5,7 @@ import com.alibaba.ha.adapter.AliHaConfig
 import com.alibaba.ha.adapter.Plugin
 import com.alibaba.ha.adapter.service.tlog.TLogLevel
 import com.alibaba.ha.adapter.service.tlog.TLogService
+import com.blankj.utilcode.util.ProcessUtils
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BuildConfig
@@ -42,7 +43,9 @@ object HighAvailableManager {
     }
 
     private fun initFirebaseCrashlytics() {
-        FirebaseCrashlytics.getInstance().setUserId(AppUtil.getUtDid())
+        if (ProcessUtils.isMainProcess()) {//非主进程调用会抛异常
+            FirebaseCrashlytics.getInstance().setUserId(AppUtil.getUtDid())
+        }
     }
 
 }
