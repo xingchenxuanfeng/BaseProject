@@ -63,14 +63,14 @@ class YiqingInfoActivity : BaseActivity() {
     private fun bindGlobalAreaData(data: YiqingModel) {
         val adapter = MultiTypeAdapter()
 
-        val topList = data.globalAreaStat.subList(0, 9)
+        val topList = data.globalAreaStat?.subList(0, 9)
         val realList = mutableListOf<Any>()
         val seeAllItemData = SeeAllItemData(Action {
             realList.clear()
-            realList.addAll(data.globalAreaStat)
+            realList.addAll(data.globalAreaStat ?: listOf())
             adapter.notifyDataSetChanged()
         })
-        realList.addAll(topList)
+        realList.addAll(topList ?: listOf())
         realList.add(seeAllItemData)
 
         adapter.items = realList
@@ -86,14 +86,14 @@ class YiqingInfoActivity : BaseActivity() {
     private fun bindChinaAreaData(data: YiqingModel) {
         val adapter = MultiTypeAdapter()
 
-        val topList = data.areaStat.subList(0, 9)
+        val topList = data.areaStat?.subList(0, 9)
         val realList = mutableListOf<Any>()
         val seeAllItemData = SeeAllItemData(Action {
             realList.clear()
-            realList.addAll(data.areaStat)
+            realList.addAll(data.areaStat ?: listOf())
             adapter.notifyDataSetChanged()
         })
-        realList.addAll(topList)
+        realList.addAll(topList ?: listOf())
         realList.add(seeAllItemData)
 
         adapter.items = realList
@@ -130,16 +130,16 @@ class YiqingInfoActivity : BaseActivity() {
         china_dead_incr.text = data.deadIncr.toStringWithSign()
 
         //全球
-        global_current_confirmed.text = data.globalStatistics.currentConfirmedCount.toString()
-        global_current_confirmed_incr.text = data.globalStatistics.currentConfirmedIncr.toStringWithSign()
+        global_current_confirmed.text = data.globalStatistics?.currentConfirmedCount.toString()
+        global_current_confirmed_incr.text = data.globalStatistics?.currentConfirmedIncr.toStringWithSign()
 
-        global_accumulate_confirmed.text = data.globalStatistics.confirmedCount.toString()
-        global_accumulate_confirmed_incr.text = data.globalStatistics.confirmedIncr.toStringWithSign()
+        global_accumulate_confirmed.text = data.globalStatistics?.confirmedCount.toString()
+        global_accumulate_confirmed_incr.text = data.globalStatistics?.confirmedIncr.toStringWithSign()
 
-        global_cured.text = data.globalStatistics.curedCount.toString()
-        global_cured_incr.text = data.globalStatistics.curedIncr.toStringWithSign()
+        global_cured.text = data.globalStatistics?.curedCount.toString()
+        global_cured_incr.text = data.globalStatistics?.curedIncr.toStringWithSign()
 
-        global_dead.text = data.globalStatistics.deadCount.toString()
-        global_dead_incr.text = data.globalStatistics.deadIncr.toStringWithSign()
+        global_dead.text = data.globalStatistics?.deadCount.toString()
+        global_dead_incr.text = data.globalStatistics?.deadIncr.toStringWithSign()
     }
 }

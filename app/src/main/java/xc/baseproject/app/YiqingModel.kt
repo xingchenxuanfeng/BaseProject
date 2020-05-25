@@ -15,9 +15,9 @@ data class YiqingModel(
         val curedIncr: Long,
         val deadIncr: Long,
         val seriousIncr: Long,
-        val globalStatistics: GlobalStatistics,
-        val areaStat: List<AreaStat>,
-        val globalAreaStat: List<GlobalAreaStat>,
+        val globalStatistics: GlobalStatistics?,
+        val areaStat: List<AreaStat>?,
+        val globalAreaStat: List<GlobalAreaStat>?,
         val getCount: Long,
         val updateTime: Long
 )

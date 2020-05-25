@@ -3,9 +3,7 @@ package com.xc.baseproject.net
 import com.google.gson.GsonBuilder
 import com.xc.baseproject.BuildConfig
 import com.zhy.http.okhttp.OkHttpUtils
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -18,18 +16,20 @@ object NetService {
     val wayJdRetrofit: Retrofit
     var githubRetrofit: Retrofit
     var aliYunRetrofit: Retrofit
+    var gitAliYunRetrofit: Retrofit
 
     const val wayJdApiAppKey = "e4388cc76bf9529e6e29a938cbdf839d"
     private const val baseUrl = "https://localhost/"
 
     private const val testApiUrl = "http://192.168.199.167:8000/"
-    private const val baseWayJdApiUrl = "https://way.jd.com/"
-    private const val baseGithubApiUrl = "https://api.github.com/"
-    private const val baseAliYunApiUrl = "http://10528180.1891346914882850.functioncompute.com/"
+    private const val wayJdApiUrl = "https://way.jd.com/"
+    private const val githubApiUrl = "https://api.github.com/"
+    private const val aliYunApiUrl = "http://10528180.1891346914882850.functioncompute.com/"
+    private const val gitAliYunApiUrl = "https://code.aliyun.com/xingchenxf/covid-19-track/raw/master/"
 
     init {
         val okHttpBuilder = OkHttpClient.Builder()
-        okHttpBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE))
+        okHttpBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.HEADERS else HttpLoggingInterceptor.Level.NONE))
         baseOkHttpClient = okHttpBuilder.build()
 
         val retrofitBuilder = Retrofit.Builder()
@@ -44,13 +44,16 @@ object NetService {
                 .build()
 
         wayJdRetrofit = baseRetrofit.newBuilder()
-                .baseUrl(baseWayJdApiUrl)
+                .baseUrl(wayJdApiUrl)
                 .build()
         githubRetrofit = baseRetrofit.newBuilder()
-                .baseUrl(baseGithubApiUrl)
+                .baseUrl(githubApiUrl)
                 .build()
         aliYunRetrofit = baseRetrofit.newBuilder()
-                .baseUrl(baseAliYunApiUrl)
+                .baseUrl(aliYunApiUrl)
+                .build()
+        gitAliYunRetrofit = baseRetrofit.newBuilder()
+                .baseUrl(gitAliYunApiUrl)
                 .build()
 
     }

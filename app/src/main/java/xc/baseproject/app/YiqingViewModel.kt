@@ -12,6 +12,7 @@ import io.reactivex.disposables.Disposable
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
+import timber.log.Timber
 
 class YiqingViewModel : ViewModel() {
 
@@ -19,6 +20,7 @@ class YiqingViewModel : ViewModel() {
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val yiqingNetService by lazy { NetService.aliYunRetrofit.create(YiqingNetService::class.java) }
+    private val yiqingGitAliYunNetService by lazy { NetService.gitAliYunRetrofit.create(YiqingGitAliYunNetService::class.java) }
 
     override fun onCleared() {
         super.onCleared()
@@ -28,6 +30,15 @@ class YiqingViewModel : ViewModel() {
     fun updateData(): Unit {
         yiqingNetService.getInfo(false)
                 .netCompose()
+                .flatMap { data ->
+                    if (data.updateTime != 0L && data.confirmedCount != 0L) {
+                        Timber.d("get info from aliyun serverLess function successful")
+                        return@flatMap Observable.just(data)
+                    } else {
+                        Timber.d("get info from aliyun serverLess function fail, use default git data")
+                        return@flatMap yiqingGitAliYunNetService.getDefaultInfo().netCompose()
+                    }
+                }
                 .subscribe {
                     yiqingLiveData.value = it
                 }
@@ -38,6 +49,13 @@ class YiqingViewModel : ViewModel() {
 
         @GET("yiqing/getinfo")
         fun getInfo(@Query("raw") raw: Boolean): Observable<YiqingModel>
+    }
+
+
+    interface YiqingGitAliYunNetService {
+
+        @GET("defaultInfo.json")
+        fun getDefaultInfo(): Observable<YiqingModel>
     }
 }
 
