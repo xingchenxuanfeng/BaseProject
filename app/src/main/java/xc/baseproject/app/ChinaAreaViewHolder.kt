@@ -23,15 +23,20 @@ class ChinaAreaViewHolder : MultiBaseViewHolder<AreaStat>() {
             deadCount.text = item.deadCount.toString()
             curedCount.text = item.curedCount.toString()
 
-            provinceName.setOnClickListener {
-                if (citiesRv.isShown) {
-                    citiesRv.setVisible(false)
-                    provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more_15dp, 0)
-                } else {
-                    citiesRv.setVisible(true)
-                    provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_expand_less_15dp, 0)
+            if (item.cities.isEmpty()) {
+                provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0)
+            } else {
+                provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more_15dp, 0)
+                provinceName.setOnClickListener {
+                    if (citiesRv.isShown) {
+                        citiesRv.setVisible(false)
+                        provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_expand_more_15dp, 0)
+                    } else {
+                        citiesRv.setVisible(true)
+                        provinceName.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, R.drawable.ic_expand_less_15dp, 0)
 
-                    bindCitiesData(citiesRv, item.cities)
+                        bindCitiesData(citiesRv, item.cities)
+                    }
                 }
             }
         }
