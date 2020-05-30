@@ -1,11 +1,13 @@
 package com.xc.baseproject.crash
 
+import android.content.Context
 import com.alibaba.ha.adapter.AliHaAdapter
 import com.alibaba.ha.adapter.AliHaConfig
 import com.alibaba.ha.adapter.Plugin
 import com.alibaba.ha.adapter.service.tlog.TLogLevel
 import com.alibaba.ha.adapter.service.tlog.TLogService
 import com.blankj.utilcode.util.ProcessUtils
+import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BuildConfig
@@ -28,7 +30,7 @@ object HighAvailableManager {
         config.appKey = aliyunAppKey //appkey
         config.appVersion = BuildConfig.VERSION_CODE.toString() //应用的版本号
         config.appSecret = aliyunAppSecret //appsecret
-        config.channel = AppUtil.getAppChannel() //应用的渠道号标记，自定义
+        config.channel = AppUtil.appChannel //应用的渠道号标记，自定义
         config.userNick = null
         config.application = AppUtil.application
         config.context = AppUtil.appContext
@@ -43,9 +45,9 @@ object HighAvailableManager {
     }
 
     private fun initFirebaseCrashlytics() {
-        if (ProcessUtils.isMainProcess()) {//非主进程调用会抛异常
-            FirebaseCrashlytics.getInstance().setUserId(AppUtil.getUtDid())
-        }
+        FirebaseApp.initializeApp(AppUtil.appContext)
+        FirebaseCrashlytics.getInstance().setUserId(AppUtil.getUtDid())
+        FirebaseCrashlytics.getInstance().setCustomKey("channel", AppUtil.appChannel)
     }
 
 }

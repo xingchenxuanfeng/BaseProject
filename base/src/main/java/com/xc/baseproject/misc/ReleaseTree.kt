@@ -5,6 +5,7 @@ import com.alibaba.ha.adapter.service.tlog.TLogService
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.BuildConfig
 import timber.log.Timber
+import java.lang.Exception
 import java.lang.RuntimeException
 
 
@@ -37,17 +38,29 @@ class ReleaseTree : Timber.DebugTree() {
 
     override fun e(t: Throwable?) {
         super.e(t)
-        FirebaseCrashlytics.getInstance().recordException(t ?: return)
+        try {
+            FirebaseCrashlytics.getInstance().recordException(t ?: return)
+        } catch (e: Exception) {
+            Log.e("ReleaseTree", "log error", e)
+        }
     }
 
     override fun e(message: String?, vararg args: Any?) {
         super.e(message, *args)
-        FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString()))
+        try {
+            FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString()))
+        } catch (e: Exception) {
+            Log.e("ReleaseTree", "log error", e)
+        }
     }
 
     override fun e(t: Throwable?, message: String?, vararg args: Any?) {
         super.e(t, message, *args)
-        FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString(), t))
+        try {
+            FirebaseCrashlytics.getInstance().recordException(RuntimeException(message + args.toString(), t))
+        } catch (e: Exception) {
+            Log.e("ReleaseTree", "log error", e)
+        }
 
     }
 

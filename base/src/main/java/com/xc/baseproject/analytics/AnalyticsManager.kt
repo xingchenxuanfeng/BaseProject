@@ -6,6 +6,7 @@ import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BuildConfig
 import com.xc.baseproject.aliyunAppKey
 import com.xc.baseproject.aliyunAppSecret
+import timber.log.Timber
 
 object AnalyticsManager {
     fun init() {
@@ -29,6 +30,7 @@ object AnalyticsManager {
 
         manService.manAnalytics.setAppVersion(BuildConfig.VERSION_CODE.toString())
 
-        manService.manAnalytics.setChannel(AppUtil.getAppChannel())
+        manService.manAnalytics.setChannel(AppUtil.appChannel)
+        Timber.e("channel:${AppUtil.appChannel}")
     }
 }

@@ -90,4 +90,5 @@ dependencies {
     api 'com.qianwen:update-app-kotlin:1.2.3'
     api 'com.qianwen:okhttp-utils:3.8.0'
 
+    implementation 'com.meituan.android.walle:library:1.1.6'
 }

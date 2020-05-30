@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import com.meituan.android.walle.WalleChannelReader
 import com.ut.device.UTDevice
 import com.xc.baseproject.account.LoginActivity
 
@@ -15,7 +16,7 @@ object AppUtil {
     val appContext: Context
         get() = application.applicationContext
 
-    fun getAppChannel() = "main"
+    val appChannel: String by lazy { WalleChannelReader.getChannel(appContext) ?: "origin" }
 
     fun getUtDid(): String {
         return UTDevice.getUtdid(appContext)
