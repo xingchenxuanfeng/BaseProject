@@ -23,11 +23,7 @@ open class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         AppUtil.application = this
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        } else {
-            Timber.plant(ReleaseTree())
-        }
+        Timber.plant(ReleaseTree())
         AnalyticsManager.init()
         HighAvailableManager.init()
 
@@ -40,7 +36,6 @@ open class BaseApplication : Application() {
         HotpatchManager.queryAndLoadNewPatch()
         RxJavaPlugins.setErrorHandler {
             Timber.e(it, "RxJavaException")
-            throw it
         }
 
         NetService.init()

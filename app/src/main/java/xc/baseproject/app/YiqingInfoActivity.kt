@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.blankj.utilcode.util.TimeUtils
+import com.blankj.utilcode.util.ToastUtils
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.app.R
 import com.xc.baseproject.extFunctions.toStringWithSign
@@ -35,15 +36,21 @@ class YiqingInfoActivity : BaseActivity() {
 
         yiqingViewModel = ViewModelProvider(this)[YiqingViewModel::class.java]
 
+        initView()
         initObserver()
+        updateData()
 
         UpdateManager.checkUpdate(this)
+    }
+
+    private fun initView() {
+        sp_layout.isRefreshing = true
     }
 
     private fun initObserver() {
         sp_layout.setColorSchemeColors(Color.rgb(47, 223, 189))
         sp_layout.setOnRefreshListener {
-            yiqingViewModel.updateData()
+            updateData()
         }
 
         yiqingViewModel.yiqingLiveData.observe(this, Observer { data ->
@@ -52,12 +59,20 @@ class YiqingInfoActivity : BaseActivity() {
 
             sp_layout.isRefreshing = false
 
+            if (data == null) {
+                ToastUtils.showShort("网络错误")
+                return@Observer
+            }
             bindStatusData(data)
 
             bindChinaAreaData(data)
 
             bindGlobalAreaData(data)
         })
+    }
+
+    private fun updateData() {
+        yiqingViewModel.updateData()
     }
 
     private fun bindGlobalAreaData(data: YiqingModel) {

@@ -18,10 +18,6 @@ import timber.log.Timber
 fun <T> Observable<T>.netCompose(): Observable<T> {
     return subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .onErrorResumeNext(Function<Throwable, ObservableSource<T>> { it: Throwable ->
-                Timber.e(it, "netError")
-                return@Function Observable.empty<T>()
-            })
 }
 
 fun Disposable.addToDisposable(compositeDisposable: CompositeDisposable) {

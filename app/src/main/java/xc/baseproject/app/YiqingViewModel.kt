@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class YiqingViewModel : ViewModel() {
 
-    val yiqingLiveData: MutableLiveData<YiqingModel> = MutableLiveData()
+    val yiqingLiveData: MutableLiveData<YiqingModel?> = MutableLiveData()
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val yiqingNetService by lazy { NetService.aliYunRetrofit.create(YiqingNetService::class.java) }
@@ -39,9 +39,11 @@ class YiqingViewModel : ViewModel() {
                         return@flatMap yiqingGitAliYunNetService.getDefaultInfo().netCompose()
                     }
                 }
-                .subscribe {
+                .subscribe({ it: YiqingModel? ->
                     yiqingLiveData.value = it
-                }
+                }, {
+                    yiqingLiveData.value = null
+                })
                 .addToDisposable(compositeDisposable)
     }
 
