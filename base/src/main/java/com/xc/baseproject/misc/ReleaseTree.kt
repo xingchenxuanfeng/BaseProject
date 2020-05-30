@@ -3,6 +3,7 @@ package com.xc.baseproject.misc
 import android.util.Log
 import com.alibaba.ha.adapter.service.tlog.TLogService
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.xc.baseproject.BuildConfig
 import timber.log.Timber
 import java.lang.RuntimeException
 
@@ -10,6 +11,9 @@ import java.lang.RuntimeException
 class ReleaseTree : Timber.DebugTree() {
 
     override fun isLoggable(tag: String?, priority: Int): Boolean {
+        if (BuildConfig.DEBUG) {
+            return true
+        }
         return priority >= Log.WARN
     }
 
