@@ -1,6 +1,6 @@
 <resources>
     <!-- Strings related to login -->
-    <string name="app_name">BaseProject</string>
+    <string name="app_name">疫情追踪</string>
 
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
