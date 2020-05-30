@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:icon="@drawable/ic_android_24dp"
+        android:icon="@drawable/ic_app_svg"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon">
