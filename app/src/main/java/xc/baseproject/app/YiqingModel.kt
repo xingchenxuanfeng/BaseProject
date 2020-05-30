@@ -1,7 +1,9 @@
 package xc.baseproject.app
 
+import androidx.annotation.Keep
 import io.reactivex.functions.Action
 
+@Keep
 data class YiqingModel(
         val currentConfirmedCount: Long,
         val confirmedCount: Long,
@@ -22,6 +24,7 @@ data class YiqingModel(
         val updateTime: Long
 )
 
+@Keep
 data class AreaStat(
         val provinceName: String,
         val provinceShortName: String,
@@ -36,6 +39,7 @@ data class AreaStat(
         val cities: List<City>
 )
 
+@Keep
 data class City(
         val cityName: String,
         val currentConfirmedCount: Long,
@@ -46,6 +50,7 @@ data class City(
         val locationID: Long
 )
 
+@Keep
 data class GlobalAreaStat(
         val id: Long? = null,
         val createTime: Long? = null,
@@ -76,6 +81,7 @@ data class GlobalAreaStat(
         val showRank: Boolean
 )
 
+@Keep
 enum class Continents {
     亚洲,
     其他,
@@ -86,6 +92,7 @@ enum class Continents {
     非洲
 }
 
+@Keep
 data class IncrVo(
         val currentConfirmedIncr: Long,
         val confirmedIncr: Long,
@@ -93,6 +100,7 @@ data class IncrVo(
         val deadIncr: Long
 )
 
+@Keep
 data class GlobalStatistics(
         val currentConfirmedCount: Long,
         val confirmedCount: Long,
@@ -104,6 +112,7 @@ data class GlobalStatistics(
         val deadIncr: Long
 )
 
+@Keep
 data class SeeAllItemData(
         val action: Action
 )

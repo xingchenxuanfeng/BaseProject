@@ -15,7 +15,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply from: rootProject.file('common.gradle')
 android {
     signingConfigs {
-        defaultConfig {
+        defaultSigningConfigs {
             keyAlias rootProject.ext.keyAlias
             keyPassword rootProject.ext.keyPassword
             storeFile rootProject.file(rootProject.ext.storeFile)
@@ -30,13 +30,13 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.versionName
-        signingConfig signingConfigs.defaultConfig
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a'//, 'arm64-v8a' //国内一般不需要arm64-v8a，如需上架googlePlay再打开
         }
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.defaultSigningConfigs
             minifyEnabled true   //开启混淆
             zipAlignEnabled true  //压缩优化
             shrinkResources true  //移出无用资源
@@ -53,6 +53,7 @@ android {
             }
         }
         debug {
+            signingConfig signingConfigs.defaultSigningConfigs //必须明确指定该值才能在debug下使用特定的签名
             ext.alwaysUpdateBuildId = false
         }
     }

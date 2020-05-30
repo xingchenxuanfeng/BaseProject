@@ -1,5 +1,6 @@
 package com.xc.baseproject.chat
 
+import androidx.annotation.Keep
 import com.avos.avoscloud.*
 import com.xc.baseproject.account.AccountManager
 import com.xc.baseproject.net.NetService
@@ -58,7 +59,10 @@ object ChatRepository {
     }
 }
 
+@Keep
 data class TestTulingResponse(val code: String, val charge: Boolean, val msg: String, val result: Result)
+
+@Keep
 data class Result(val code: Int, val text: String)
 
 @AVClassName("ChatMessage")

@@ -1,5 +1,6 @@
 package com.xc.baseproject.account.github
 
+import androidx.annotation.Keep
 import com.xc.baseproject.net.NetService
 import io.reactivex.Observable
 import retrofit2.http.*
@@ -27,7 +28,10 @@ object GithubRepository {
     }
 }
 
+@Keep
 data class AccessToken(var access_token: String)
+
+@Keep
 data class GithubUser(
         var avatar_url: String = "",
         var bio: Any = Any(),

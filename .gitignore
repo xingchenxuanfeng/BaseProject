@@ -122,3 +122,5 @@ mainframer
 .mainframer/
 .idea/mainframer.xml
 .idea/mainframer_state.xml
+
+app/release
