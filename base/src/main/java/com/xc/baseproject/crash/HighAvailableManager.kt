@@ -1,26 +1,19 @@
 package com.xc.baseproject.crash
 
-import android.content.Context
 import com.alibaba.ha.adapter.AliHaAdapter
 import com.alibaba.ha.adapter.AliHaConfig
 import com.alibaba.ha.adapter.Plugin
 import com.alibaba.ha.adapter.service.tlog.TLogLevel
 import com.alibaba.ha.adapter.service.tlog.TLogService
-import com.blankj.utilcode.util.ProcessUtils
-import com.google.firebase.FirebaseApp
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BuildConfig
 import com.xc.baseproject.aliyunAppKey
 import com.xc.baseproject.aliyunAppSecret
 
-
 object HighAvailableManager {
 
     fun init() {
         initAliHA()
-
-        initFirebaseCrashlytics()
     }
 
     private fun initAliHA() {
@@ -44,10 +37,5 @@ object HighAvailableManager {
         AliHaAdapter.getInstance().start(config)
     }
 
-    private fun initFirebaseCrashlytics() {
-        FirebaseApp.initializeApp(AppUtil.appContext)
-        FirebaseCrashlytics.getInstance().setUserId(AppUtil.getUtDid())
-        FirebaseCrashlytics.getInstance().setCustomKey("channel", AppUtil.appChannel)
-    }
 
 }

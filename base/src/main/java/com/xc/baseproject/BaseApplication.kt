@@ -7,6 +7,7 @@ import com.xc.baseproject.analytics.AnalyticsManager
 import com.xc.baseproject.constants.LEANCLOUD_APP_ID
 import com.xc.baseproject.constants.LEANCLOUD_APP_Key
 import com.xc.baseproject.crash.HighAvailableManager
+import com.xc.baseproject.firebase.FirebaseManager
 import com.xc.baseproject.hotpatch.HotpatchManager
 import com.xc.baseproject.misc.ReleaseTree
 import com.xc.baseproject.net.NetService
@@ -24,6 +25,7 @@ open class BaseApplication : Application() {
         super.onCreate()
         AppUtil.application = this
         Timber.plant(ReleaseTree())
+        FirebaseManager.init()
         AnalyticsManager.init()
         HighAvailableManager.init()
 
