@@ -55,7 +55,7 @@ class YiqingInfoActivity : BaseActivity() {
 
         yiqingViewModel.yiqingLiveData.observe(this, Observer { data ->
 
-            Timber.d("yiqing data:$data")
+//            Timber.d("yiqing data:$data")
 
             sp_layout.isRefreshing = false
 
