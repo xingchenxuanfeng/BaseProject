@@ -4,14 +4,18 @@
     tools:ignore="AppCompatResource">
 
     <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_add_24dp"
+        android:id="@+id/share"
+        android:icon="@drawable/ic_share_24"
         android:showAsAction="withText|always"
-        android:title="添加" />
-
+        android:title="分享" />
+    <item
+        android:id="@+id/like"
+        android:icon="@drawable/ic_thumb_up_24"
+        android:showAsAction="withText|always"
+        android:title="给个好评" />
     <item
         android:id="@+id/feedback"
         android:icon="@drawable/ic_feedback_24dp"
-        android:showAsAction="withText|always"
+        android:showAsAction="withText|ifRoom"
         android:title="反馈" />
 </menu>

@@ -1,6 +1,5 @@
 package xc.baseproject.app
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.xc.baseproject.extFunctions.addToDisposable
@@ -8,8 +7,6 @@ import com.xc.baseproject.extFunctions.netCompose
 import com.xc.baseproject.net.NetService
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
 import timber.log.Timber
@@ -17,6 +14,7 @@ import timber.log.Timber
 class YiqingViewModel : ViewModel() {
 
     val yiqingLiveData: MutableLiveData<YiqingModel?> = MutableLiveData()
+    var shareText: String = "超好的冠状病毒疫情追踪App\nhttps://w.url.cn/s/AmLG7xo"
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val yiqingNetService by lazy { NetService.aliYunRetrofit.create(YiqingNetService::class.java) }
@@ -27,7 +25,7 @@ class YiqingViewModel : ViewModel() {
         compositeDisposable.clear()
     }
 
-    fun updateData(): Unit {
+    fun updateData() {
         yiqingNetService.getInfo(false)
                 .netCompose()
                 .flatMap { data ->
@@ -45,6 +43,13 @@ class YiqingViewModel : ViewModel() {
                     yiqingLiveData.value = null
                 })
                 .addToDisposable(compositeDisposable)
+
+        yiqingGitAliYunNetService.getShareInfo()
+                .netCompose()
+                .subscribe {
+                    shareText = it?.shareText ?: shareText
+                }
+                .addToDisposable(compositeDisposable)
     }
 
     interface YiqingNetService {
@@ -58,6 +63,9 @@ class YiqingViewModel : ViewModel() {
 
         @GET("defaultInfo.json")
         fun getDefaultInfo(): Observable<YiqingModel>
+
+        @GET("shareInfo.json")
+        fun getShareInfo(): Observable<ShareInfo>
     }
 }
 

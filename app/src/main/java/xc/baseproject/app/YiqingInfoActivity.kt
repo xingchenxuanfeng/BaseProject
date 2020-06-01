@@ -2,18 +2,22 @@ package xc.baseproject.app
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alibaba.sdk.android.feedback.impl.FeedbackAPI
+import com.blankj.utilcode.util.IntentUtils
 import com.blankj.utilcode.util.TimeUtils
 import com.blankj.utilcode.util.ToastUtils
+import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BaseActivity
 import com.xc.baseproject.app.R
 import com.xc.baseproject.extFunctions.toStringWithSign
 import com.xc.baseproject.update.UpdateManager
 import io.reactivex.functions.Action
 import kotlinx.android.synthetic.main.activity_yiqing.*
-import kotlinx.android.synthetic.main.activity_yiqing.sp_layout
 import kotlinx.android.synthetic.main.china_accumulate_confirmed.*
 import kotlinx.android.synthetic.main.china_cured.*
 import kotlinx.android.synthetic.main.china_current_confirmed.*
@@ -25,7 +29,6 @@ import kotlinx.android.synthetic.main.global_cured.*
 import kotlinx.android.synthetic.main.global_current_confirmed.*
 import kotlinx.android.synthetic.main.global_dead.*
 import me.drakeet.multitype.MultiTypeAdapter
-import timber.log.Timber
 
 class YiqingInfoActivity : BaseActivity() {
     private lateinit var yiqingViewModel: YiqingViewModel
@@ -156,5 +159,28 @@ class YiqingInfoActivity : BaseActivity() {
 
         global_dead.text = data.globalStatistics?.deadCount.toString()
         global_dead_incr.text = data.globalStatistics?.deadIncr.toStringWithSign()
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.share -> {
+                val shareTextIntent = IntentUtils.getShareTextIntent(yiqingViewModel.shareText, true)
+                startActivity(shareTextIntent)
+            }
+            R.id.like -> {
+                AppUtil.jumpToAppMarketDetailPage()
+            }
+            R.id.feedback -> {
+                FeedbackAPI.openFeedbackActivity()
+            }
+        }
+        return true
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
     }
 }

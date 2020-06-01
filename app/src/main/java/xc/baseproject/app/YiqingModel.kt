@@ -116,3 +116,8 @@ data class GlobalStatistics(
 data class SeeAllItemData(
         val action: Action
 )
+
+@Keep
+data class ShareInfo(
+        val shareText: String
+)
