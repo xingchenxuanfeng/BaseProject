@@ -4,6 +4,7 @@ import android.app.Activity
 import com.vector.update_app.UpdateAppBean
 import com.vector.update_app_kotlin.check
 import com.vector.update_app_kotlin.updateApp
+import com.xc.baseproject.AppUtil
 import com.xc.baseproject.BuildConfig
 import org.json.JSONObject
 
@@ -48,7 +49,7 @@ object UpdateManager {
     }
 
     private fun checkWhetherUpdate(jsonObject: JSONObject): String {
-        return if (jsonObject.optInt("new_version_code") > BuildConfig.VERSION_CODE) "Yes" else "No"
+        return if (jsonObject.optInt("new_version_code") > AppUtil.appVersionCode) "Yes" else "No"
     }
 
 }

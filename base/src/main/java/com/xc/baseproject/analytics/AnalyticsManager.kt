@@ -28,7 +28,7 @@ object AnalyticsManager {
         // 通过此接口关闭页面自动打点功能，详见文档4.2
         // manService.manAnalytics.turnOffAutoPageTrack()
 
-        manService.manAnalytics.setAppVersion(BuildConfig.VERSION_CODE.toString())
+        manService.manAnalytics.setAppVersion(AppUtil.appVersionCode.toString())
 
         manService.manAnalytics.setChannel(AppUtil.appChannel)
         Timber.e("channel:${AppUtil.appChannel}")

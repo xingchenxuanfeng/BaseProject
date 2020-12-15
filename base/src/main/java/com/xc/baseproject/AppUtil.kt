@@ -23,6 +23,10 @@ object AppUtil {
         return UTDevice.getUtdid(appContext)
     }
 
+    val appVersionCode: Int by lazy { BuildConfig.VERSION_CODE }
+
+    val appVersionName: String by lazy { com.blankj.utilcode.util.AppUtils.getAppVersionName() }
+
     fun jumpToAppMarketDetailPage() {
         val appPkg = appContext.packageName
         val uri = Uri.parse("market://details?id=$appPkg")

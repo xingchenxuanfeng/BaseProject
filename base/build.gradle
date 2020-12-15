@@ -9,6 +9,9 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion as int
         versionCode rootProject.ext.versionCode as int
         versionName rootProject.ext.versionName
+
+        buildConfigField 'int', 'VERSION_CODE', "${rootProject.ext.versionCode as int}"
+        buildConfigField 'String', 'VERSION_NAME', "\"${rootProject.ext.versionName}\""
     }
     buildTypes {
         release {

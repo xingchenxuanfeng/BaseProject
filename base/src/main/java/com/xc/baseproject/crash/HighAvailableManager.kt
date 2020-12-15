@@ -21,7 +21,7 @@ object HighAvailableManager {
 
         val config = AliHaConfig()
         config.appKey = aliyunAppKey //appkey
-        config.appVersion = BuildConfig.VERSION_CODE.toString() //应用的版本号
+        config.appVersion = AppUtil.appVersionCode.toString() //应用的版本号
         config.appSecret = aliyunAppSecret //appsecret
         config.channel = AppUtil.appChannel //应用的渠道号标记，自定义
         config.userNick = null

@@ -2,7 +2,9 @@ package com.xc.baseproject.hotpatch;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+
 import androidx.annotation.Keep;
+
 import android.util.Log;
 
 import com.taobao.sophix.PatchStatus;
@@ -10,7 +12,8 @@ import com.taobao.sophix.SophixApplication;
 import com.taobao.sophix.SophixEntry;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
-import com.xc.baseproject.*;
+import com.xc.baseproject.BaseApplication;
+import com.xc.baseproject.BuildConfig;
 
 import static com.xc.baseproject.BaseApplicationKt.aliyunAppKey;
 import static com.xc.baseproject.BaseApplicationKt.aliyunAppRSASecret;
