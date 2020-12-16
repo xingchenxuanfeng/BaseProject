@@ -22,8 +22,6 @@ object AnalyticsManager {
         // 若需要关闭 SDK 的自动异常捕获功能可进行如下操作(如需关闭crash report，建议在init方法调用前关闭crash),详见文档5.4
         manService.manAnalytics.turnOffCrashReporter()
 
-        // MAN初始化
-        manService.manAnalytics.init(AppUtil.application, AppUtil.appContext, aliyunAppKey, aliyunAppSecret)
 
         // 通过此接口关闭页面自动打点功能，详见文档4.2
         // manService.manAnalytics.turnOffAutoPageTrack()
@@ -31,6 +29,10 @@ object AnalyticsManager {
         manService.manAnalytics.setAppVersion(AppUtil.appVersionCode.toString())
 
         manService.manAnalytics.setChannel(AppUtil.appChannel)
+
+        // MAN初始化
+        manService.manAnalytics.init(AppUtil.application, AppUtil.appContext, aliyunAppKey, aliyunAppSecret)
+
         Timber.e("channel:${AppUtil.appChannel}")
     }
 }
