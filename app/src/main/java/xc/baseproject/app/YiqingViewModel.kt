@@ -14,7 +14,7 @@ import timber.log.Timber
 class YiqingViewModel : ViewModel() {
 
     val yiqingLiveData: MutableLiveData<YiqingModel?> = MutableLiveData()
-    var shareText: String = "超好的冠状病毒疫情追踪App\nhttps://w.url.cn/s/AmLG7xo"
+    var shareText: String = "超好用的冠状病毒疫情追踪App\nhttp://10528180.1891346914882850.functioncompute.com/yiqing/h5/sharepage"
 
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private val yiqingNetService by lazy { NetService.aliYunRetrofit.create(YiqingNetService::class.java) }
